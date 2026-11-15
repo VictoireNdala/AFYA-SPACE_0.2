@@ -1,0 +1,33 @@
+services:
+  api: &main_app
+    build:
+      context: .
+      target: dev
+      dockerfile: ./Dockerfile
+    image: afya_space_api:${AFYA_SPACE_API_VERSION:-latest}
+    restart: always
+    ports:
+      # Exposes application port.
+    - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      AFYA_SPACE_API_HOST: 0.0.0.0
+      AFYA_SPACE_API_RELOAD: "True"
+      AFYA_SPACE_API_DB_FILE: /db_data/db.sqlite3
+    volumes:
+      - .:/app/src/
+      - afya_space_api-db-data:/db_data/
+
+  migrator:
+    <<: *main_app
+    restart: "no"
+    command: alembic upgrade head
+    depends_on: {}
+
+
+
+volumes:
+  afya_space_api-db-data:
+    name: afya_space_api-db-data
