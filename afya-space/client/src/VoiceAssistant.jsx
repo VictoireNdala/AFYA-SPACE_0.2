@@ -12,7 +12,7 @@ const NAMES = {
 };
 
 const METRIC_WORDS = {
-  hr: ['rythme', 'cardiaque', 'pouls', 'coeur', 'cÅ“ur', 'bpm'],
+  hr: ['rythme', 'cardiaque', 'pouls', 'coeur', 'cœur', 'bpm'],
   spo2: ['oxygene', 'saturation', 'spo2', 'spo 2'],
   temp: ['temperature', 'fievre'],
   sleep: ['sommeil', 'dormi'],
@@ -31,33 +31,33 @@ const sleepWords = (h) => {
 
 const VALUE = {
   hr: (v) => `rythme cardiaque ${v.hr} battements par minute`,
-  spo2: (v) => `saturation en oxygÃ¨ne ${v.spo2} pour cent`,
-  temp: (v) => `tempÃ©rature ${String(v.temp).replace('.', ',')} degrÃ©s`,
+  spo2: (v) => `saturation en oxygène ${v.spo2} pour cent`,
+  temp: (v) => `température ${String(v.temp).replace('.', ',')} degrés`,
   sleep: (v) => `sommeil ${sleepWords(v.sleep)}`,
-  stress: (v) => `stress estimÃ© Ã  ${v.stress} sur 100`,
+  stress: (v) => `stress estimé à ${v.stress} sur 100`,
   radiation: (v) => `radiation ${v.radiation} microsieverts par heure`,
 };
 
-const CHIPS = ['Ã‰tat de lâ€™Ã©quipage', 'Alertes', 'Rythme cardiaque dâ€™Amara', 'OxygÃ¨ne de Kenji'];
+const CHIPS = ['État de l’équipage', 'Alertes', 'Rythme cardiaque d’Amara', 'Oxygène de Kenji'];
 
 function answer(text, crew) {
-  if (!crew.length) return 'Je nâ€™ai pas encore de donnÃ©es. VÃ©rifie que le serveur est dÃ©marrÃ©.';
+  if (!crew.length) return 'Je n’ai pas encore de données. Vérifie que le serveur est démarré.';
   const t = norm(text);
   const who = crew.filter((a) => (NAMES[a.id] ? NAMES[a.id].words : []).some((w) => t.includes(w)));
   const metric = Object.keys(METRIC_WORDS).find((m) => METRIC_WORDS[m].some((w) => t.includes(w)));
   const spoken = (a) => (NAMES[a.id] ? NAMES[a.id].spoken : a.name);
 
   if (/\baide\b|que peux|que sais|commandes/.test(t)) {
-    return 'Tu peux me demander lâ€™Ã©tat de lâ€™Ã©quipage, les alertes, ou une constante : par exemple rythme cardiaque dâ€™Amara, oxygÃ¨ne de Kenji ou sommeil de Lucia.';
+    return 'Tu peux me demander l’état de l’équipage, les alertes, ou une constante : par exemple rythme cardiaque d’Amara, oxygène de Kenji ou sommeil de Lucia.';
   }
   if (/urgence|secours/.test(t)) {
-    return 'En cas dâ€™urgence rÃ©elle, contacte immÃ©diatement le mÃ©decin de bord. Ceci est un prototype de dÃ©monstration.';
+    return 'En cas d’urgence réelle, contacte immédiatement le médecin de bord. Ceci est un prototype de démonstration.';
   }
   if (/alerte|probleme|anomalie/.test(t)) {
     const active = crew
       .flatMap((a) => a.status.alerts.map((x) => ({ a, x })))
       .sort((p, q) => q.x.level - p.x.level);
-    if (active.length === 0) return 'Aucune alerte active. Tout lâ€™Ã©quipage est stable.';
+    if (active.length === 0) return 'Aucune alerte active. Tout l’équipage est stable.';
     return active
       .slice(0, 3)
       .map(({ a, x }) => `${spoken(a)} : ${x.label}, niveau ${x.level === 2 ? 'critique' : 'attention'}. ${x.action}`)
@@ -73,14 +73,14 @@ function answer(text, crew) {
       .map((a) => {
         const base = `${spoken(a)} : ${LEVEL_WORD[a.status.level]}.`;
         const top = [...a.status.alerts].sort((x, y) => y.level - x.level)[0];
-        return top ? `${base} Point dâ€™attention : ${top.label}.` : `${base} ${VALUE.hr(a.vitals)}.`;
+        return top ? `${base} Point d’attention : ${top.label}.` : `${base} ${VALUE.hr(a.vitals)}.`;
       })
       .join(' ');
   }
-  return 'Je nâ€™ai pas compris. Essaie : Ã©tat de lâ€™Ã©quipage, alertes, ou rythme cardiaque dâ€™Amara.';
+  return 'Je n’ai pas compris. Essaie : état de l’équipage, alertes, ou rythme cardiaque d’Amara.';
 }
 
-// ---------- SynthÃ¨se vocale ----------
+// ---------- Synthèse vocale ----------
 const voiceScore = (v) =>
   (/natural/i.test(v.name) ? 3 : /online/i.test(v.name) ? 2 : /google/i.test(v.name) ? 1 : 0) +
   (v.lang.toLowerCase() === 'fr-fr' ? 0.5 : 0);
@@ -121,7 +121,7 @@ const savePref = (k, v) => {
   try {
     localStorage.setItem(k, String(v));
   } catch {
-    /* ignorÃ© */
+    /* ignoré */
   }
 };
 
@@ -145,7 +145,7 @@ export default function VoiceAssistant({ crew, alerts }) {
   const [voiceName, setVoiceName] = useState(() => loadPref('afya-voice-name', ''));
   const [voices, setVoices] = useState([]);
   const [log, setLog] = useState([
-    { from: 'bot', text: 'Bonjour, je suis lâ€™assistant vocal Afya. Demande-moi lâ€™Ã©tat de lâ€™Ã©quipage.' },
+    { from: 'bot', text: 'Bonjour, je suis l’assistant vocal Afya. Demande-moi l’état de l’équipage.' },
   ]);
 
   const recRef = useRef(null);
@@ -199,11 +199,11 @@ export default function VoiceAssistant({ crew, alerts }) {
     rec.onerror = (e) => {
       setListening(false);
       const msgs = {
-        'not-allowed': 'Le micro est refusÃ© : autorise-le dans le navigateur.',
+        'not-allowed': 'Le micro est refusé : autorise-le dans le navigateur.',
         network: 'La reconnaissance vocale demande une connexion internet (Chrome ou Edge).',
-        'no-speech': 'Je nâ€™ai rien entendu, rÃ©essaie.',
+        'no-speech': 'Je n’ai rien entendu, réessaie.',
       };
-      say(msgs[e.error] || 'La reconnaissance vocale a Ã©chouÃ©. Utilise la zone de texte.');
+      say(msgs[e.error] || 'La reconnaissance vocale a échoué. Utilise la zone de texte.');
     };
     rec.onresult = (e) => handleRef.current(e.results[0][0].transcript);
     recRef.current = rec;
@@ -243,7 +243,7 @@ export default function VoiceAssistant({ crew, alerts }) {
     setVoiceName(v);
     savePref('afya-voice-name', v);
   };
-  const testVoice = () => speak('Bonjour, voici la voix de lâ€™assistant Afya.', rateRef.current, voiceRef.current);
+  const testVoice = () => speak('Bonjour, voici la voix de l’assistant Afya.', rateRef.current, voiceRef.current);
 
   return (
     <>
@@ -251,7 +251,7 @@ export default function VoiceAssistant({ crew, alerts }) {
         <div className="voice-panel" role="dialog" aria-label="Assistant vocal">
           <strong>Assistant vocal Afya</strong>
           <div className="voice-opts">
-            <label><input type="checkbox" checked={speakOn} onChange={(e) => setSpeakOn(e.target.checked)} /> RÃ©ponses vocales</label>
+            <label><input type="checkbox" checked={speakOn} onChange={(e) => setSpeakOn(e.target.checked)} /> Réponses vocales</label>
             <label><input type="checkbox" checked={autoAlerts} onChange={(e) => setAutoAlerts(e.target.checked)} /> Alertes vocales</label>
           </div>
 
@@ -259,7 +259,7 @@ export default function VoiceAssistant({ crew, alerts }) {
             <div className="voice-set">
               <span>Vitesse</span>
               <input type="range" min="0.8" max="1.6" step="0.05" value={rate} onChange={(e) => changeRate(Number(e.target.value))} aria-label="Vitesse de la voix" />
-              <span>{rate.toFixed(2)}Ã—</span>
+              <span>{rate.toFixed(2)}×</span>
               <span>Voix</span>
               <select value={voiceName} onChange={(e) => changeVoice(e.target.value)} aria-label="Choix de la voix">
                 <option value="">Automatique (la plus naturelle)</option>
@@ -284,7 +284,7 @@ export default function VoiceAssistant({ crew, alerts }) {
           </div>
 
           <form className="voice-input" onSubmit={send}>
-            <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ã‰cris ou parleâ€¦" aria-label="Commande" />
+            <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Écris ou parle…" aria-label="Commande" />
             <button type="submit" className="btn">Envoyer</button>
           </form>
           {!SR && <p className="muted small">Micro non disponible dans ce navigateur : utilise Chrome ou Edge, ou la zone de texte.</p>}
@@ -294,8 +294,8 @@ export default function VoiceAssistant({ crew, alerts }) {
       <button
         className={`voice-fab ${listening ? 'live' : ''}`}
         onClick={() => { if (!open) { setOpen(true); } else if (SR) { toggleMic(); } else { setOpen(false); } }}
-        aria-label={listening ? 'ArrÃªter lâ€™Ã©coute' : 'Assistant vocal'}
-        title={open ? 'Parler' : 'Ouvrir lâ€™assistant vocal'}
+        aria-label={listening ? 'Arrêter l’écoute' : 'Assistant vocal'}
+        title={open ? 'Parler' : 'Ouvrir l’assistant vocal'}
       >
         <MicIcon />
       </button>
