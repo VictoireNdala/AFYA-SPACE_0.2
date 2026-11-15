@@ -6,6 +6,7 @@ import ExerciseModule from './ExerciseModule.jsx';
 import MoodModule from './MoodModule.jsx';
 import OfflineModule from './OfflineModule.jsx';
 import TwinModule from './TwinModule.jsx';
+import VoiceAssistant from './VoiceAssistant.jsx';
 
 const TABS = [
   ['crew', 'Équipage'],
@@ -47,6 +48,7 @@ export default function App() {
       {tab === 'twin' && <TwinModule />}
 
       <footer>Données simulées – prototype de démonstration, pas un dispositif médical.</footer>
+      <VoiceAssistant crew={crew} alerts={alerts} />
     </div>
   );
 }
