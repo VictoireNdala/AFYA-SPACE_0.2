@@ -1,0 +1,13 @@
+numpy
+pandas
+scikit-learn
+xgboost
+rich
+tqdm
+streamlit>=1.50
+plotly
+openpyxl
+scipy
+# Only needed for the original course CLI (main.py, mlp_pytorch / mlp_tensorflow / autoencoder):
+# torch
+# tensorflow

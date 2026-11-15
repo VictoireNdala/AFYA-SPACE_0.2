@@ -5,6 +5,10 @@ Built for the NASA Space Apps Challenge 2026 - Lubumbashi, DRC.
 
 Research prototype. Not a medical device. All data is simulated. SANS has no established treatment and its exact cause is unknown. SANS Guardian does not diagnose, prescribe or choose doses. Protocols and alert thresholds are configurable by the medical team; defaults in this repository are demo values.
 
+## Crew analysis module
+
+This repository also includes a crew-analysis prototype for simulated SANS-related data. It predicts risk, flags anomalies, generates alerts and displays a wellbeing index. See [docs/CREW_ANALYSIS.md](docs/CREW_ANALYSIS.md) for its setup, methods and limitations.
+
 Why this matters
 Weightlessness shifts about 2 liters of fluid toward the upper body (NASA Cardiovascular and Vision Laboratory).
 About 70% of ISS astronauts on ~6-month missions show SANS findings, and about 20% develop clinically significant SANS.
@@ -87,4 +91,4 @@ License
 Choose a license before publishing (for example MIT) and add a LICENSE file.
 
 Team
-NASA Space Apps Challenge Lubumbashi 2026 team: AFYA SPACE.    
+NASA Space Apps Challenge Lubumbashi 2026 team: AFYA SPACE.

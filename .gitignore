@@ -1,0 +1,28 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Secrets and local config
+.env
+*.key
+
+# Generated files (recreate with the commands in the README)
+outputs/
+data/sans_crew_daily.csv
+data/uploaded_crew.csv
+
+# Course material not needed by the team (keep locally if you want it)
+data/iris.csv
+data/telco-customer-churn.xls
+
+# Models and caches
+models_saved/
+*.joblib
+*.onnx
+.DS_Store
+__MACOSX/
