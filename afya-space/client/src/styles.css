@@ -145,3 +145,6 @@ footer { margin-top: 18px; text-align: center; color: var(--muted); font-size: 0
 /* ---- Réglages de la voix ---- */
 .voice-set { display: grid; grid-template-columns: 56px 1fr auto; gap: 8px; align-items: center; font-size: 0.8rem; color: var(--muted); }
 .voice-set select { grid-column: 2; min-width: 0; background: var(--tile); border: 1px solid var(--line); border-radius: 8px; padding: 6px; color: var(--text); font: inherit; }
+/* ---- Langue assistant ---- */
+.voice-lang { display: flex; gap: 6px; align-items: center; font-size: 0.8rem; color: var(--muted); }
+.btn.active { border-color: #3b82f6; color: var(--blue); }
