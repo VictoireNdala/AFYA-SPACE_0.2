@@ -1,0 +1,833 @@
+{
+ "info": {
+  "best_model": "Random Forest",
+  "n_train": 200,
+  "n_train_positive": 47,
+  "prevalence": 0.235,
+  "generated_from": "C:\\Users\\DELL\\Desktop\\BEN\\UNH\\NASA SPACE CHALLENGE\\PROJET\\Nasa_space AFIA SPACE\\Nasa_space AFIA SPACE\\afya-space\\analysis\\data\\model_input.csv",
+  "n_current": 6,
+  "disclaimer": "Research prototype. Not a medical device. All data is simulated. Thresholds and the risk model are demo values and are not clinically validated."
+ },
+ "scored_up_to_day": 130,
+ "training_source": "200 missions from the SANS Guardian onboard simulator",
+ "early_window_days": 60,
+ "outcome_definition": "Mean retinal thickening >= 40.0 um or hyperopic shift >= 0.75 D over the last 30 days of the mission (demo definition)",
+ "metrics": [
+  {
+   "model": "Random Forest",
+   "roc_auc": 0.9953,
+   "accuracy": 0.975,
+   "precision": 0.9565,
+   "recall": 0.9362,
+   "f1": 0.9462,
+   "brier": 0.0226
+  },
+  {
+   "model": "Logistic Regression",
+   "roc_auc": 0.9949,
+   "accuracy": 0.975,
+   "precision": 0.9773,
+   "recall": 0.9149,
+   "f1": 0.9451,
+   "brier": 0.0278
+  },
+  {
+   "model": "Gradient Boosting",
+   "roc_auc": 0.9744,
+   "accuracy": 0.97,
+   "precision": 0.9362,
+   "recall": 0.9362,
+   "f1": 0.9362,
+   "brier": 0.0296
+  }
+ ],
+ "importance": [
+  {
+   "feature": "thick_slope_early",
+   "label": "Early thickening rate",
+   "coef": 1.8985,
+   "abs_coef": 1.8985
+  },
+  {
+   "feature": "refr_delta_early",
+   "label": "Early refraction shift",
+   "coef": 1.5063,
+   "abs_coef": 1.5063
+  },
+  {
+   "feature": "thick_delta_early",
+   "label": "Early retinal thickening",
+   "coef": 1.4987,
+   "abs_coef": 1.4987
+  },
+  {
+   "feature": "stress_mean_early",
+   "label": "Stress level",
+   "coef": -0.4135,
+   "abs_coef": 0.4135
+  },
+  {
+   "feature": "baseline_refraction",
+   "label": "Baseline refraction",
+   "coef": 0.2754,
+   "abs_coef": 0.2754
+  },
+  {
+   "feature": "adherence_early",
+   "label": "Supplement adherence",
+   "coef": -0.2154,
+   "abs_coef": 0.2154
+  },
+  {
+   "feature": "sex_f",
+   "label": "Female",
+   "coef": 0.1999,
+   "abs_coef": 0.1999
+  },
+  {
+   "feature": "cuff_hours_early",
+   "label": "Thigh-cuff hours",
+   "coef": 0.169,
+   "abs_coef": 0.169
+  },
+  {
+   "feature": "iop_delta_early",
+   "label": "Early IOP change",
+   "coef": -0.142,
+   "abs_coef": 0.142
+  },
+  {
+   "feature": "sleep_mean_early",
+   "label": "Sleep duration",
+   "coef": -0.1385,
+   "abs_coef": 0.1385
+  },
+  {
+   "feature": "stress_slope_early",
+   "label": "Stress trend",
+   "coef": -0.0972,
+   "abs_coef": 0.0972
+  },
+  {
+   "feature": "genetic_variant",
+   "label": "One-carbon pathway variant",
+   "coef": -0.0787,
+   "abs_coef": 0.0787
+  },
+  {
+   "feature": "baseline_thickness",
+   "label": "Baseline retinal thickness",
+   "coef": -0.069,
+   "abs_coef": 0.069
+  },
+  {
+   "feature": "age",
+   "label": "Age",
+   "coef": 0.02,
+   "abs_coef": 0.02
+  },
+  {
+   "feature": "baseline_iop",
+   "label": "Baseline IOP",
+   "coef": -0.0157,
+   "abs_coef": 0.0157
+  },
+  {
+   "feature": "blur_mean_early",
+   "label": "Blurred-vision reports",
+   "coef": 0.0039,
+   "abs_coef": 0.0039
+  },
+  {
+   "feature": "venous_events_early",
+   "label": "Venous symptom events",
+   "coef": 0.0,
+   "abs_coef": 0.0
+  }
+ ],
+ "crew": [
+  {
+   "astronaut_id": "AST-001",
+   "mission_day": 130,
+   "mission_days": 180,
+   "risk_probability": 0.002,
+   "risk_level": "Low",
+   "thickness_delta_um": 3.7,
+   "refraction_delta_d": 0.16,
+   "iop_mmhg": 12.7,
+   "adherence_14d": 1.0,
+   "stress_7d": 2.8,
+   "sleep_7d": 6.9,
+   "wellbeing_index": 77.0,
+   "top_factors": "Early thickening rate (lowers risk); Early retinal thickening (lowers risk); Supplement adherence (lowers risk)",
+   "anomalous_days": 0,
+   "alert_level": "NONE",
+   "n_alerts": 0
+  },
+  {
+   "astronaut_id": "AST-002",
+   "mission_day": 130,
+   "mission_days": 180,
+   "risk_probability": 0.03,
+   "risk_level": "Low",
+   "thickness_delta_um": 10.8,
+   "refraction_delta_d": 0.31,
+   "iop_mmhg": 16.1,
+   "adherence_14d": 1.0,
+   "stress_7d": 3.3,
+   "sleep_7d": 7.2,
+   "wellbeing_index": 78.0,
+   "top_factors": "Early thickening rate (lowers risk); Stress level (raises risk); Baseline refraction (raises risk)",
+   "anomalous_days": 0,
+   "alert_level": "NONE",
+   "n_alerts": 0
+  },
+  {
+   "astronaut_id": "AST-003",
+   "mission_day": 130,
+   "mission_days": 180,
+   "risk_probability": 0.918,
+   "risk_level": "High",
+   "thickness_delta_um": 41.9,
+   "refraction_delta_d": 1.12,
+   "iop_mmhg": 16.0,
+   "adherence_14d": 0.71,
+   "stress_7d": 2.9,
+   "sleep_7d": 6.8,
+   "wellbeing_index": 74.0,
+   "top_factors": "Early thickening rate (raises risk); Early retinal thickening (raises risk); Early refraction shift (raises risk)",
+   "anomalous_days": 0,
+   "alert_level": "URGENT",
+   "n_alerts": 3
+  },
+  {
+   "astronaut_id": "AST-004",
+   "mission_day": 130,
+   "mission_days": 180,
+   "risk_probability": 0.015,
+   "risk_level": "Low",
+   "thickness_delta_um": 4.5,
+   "refraction_delta_d": 0.04,
+   "iop_mmhg": 14.8,
+   "adherence_14d": 1.0,
+   "stress_7d": 3.1,
+   "sleep_7d": 7.2,
+   "wellbeing_index": 78.0,
+   "top_factors": "Early thickening rate (lowers risk); Early refraction shift (lowers risk); Early retinal thickening (lowers risk)",
+   "anomalous_days": 0,
+   "alert_level": "NONE",
+   "n_alerts": 0
+  },
+  {
+   "astronaut_id": "AST-005",
+   "mission_day": 130,
+   "mission_days": 180,
+   "risk_probability": 0.758,
+   "risk_level": "High",
+   "thickness_delta_um": 25.1,
+   "refraction_delta_d": 0.68,
+   "iop_mmhg": 16.3,
+   "adherence_14d": 0.86,
+   "stress_7d": 3.5,
+   "sleep_7d": 7.0,
+   "wellbeing_index": 74.0,
+   "top_factors": "Early thickening rate (raises risk); Early retinal thickening (raises risk); Early refraction shift (raises risk)",
+   "anomalous_days": 0,
+   "alert_level": "WATCH",
+   "n_alerts": 3
+  },
+  {
+   "astronaut_id": "AST-006",
+   "mission_day": 130,
+   "mission_days": 180,
+   "risk_probability": 0.001,
+   "risk_level": "Low",
+   "thickness_delta_um": 5.4,
+   "refraction_delta_d": 0.11,
+   "iop_mmhg": 17.9,
+   "adherence_14d": 0.93,
+   "stress_7d": 4.4,
+   "sleep_7d": 7.0,
+   "wellbeing_index": 69.0,
+   "top_factors": "Early thickening rate (lowers risk); Early refraction shift (lowers risk); Early retinal thickening (lowers risk)",
+   "anomalous_days": 0,
+   "alert_level": "NONE",
+   "n_alerts": 0
+  }
+ ],
+ "contributions": {
+  "AST-001": [
+   {
+    "feature": "thick_slope_early",
+    "label": "Early thickening rate",
+    "value": -1.186
+   },
+   {
+    "feature": "thick_delta_early",
+    "label": "Early retinal thickening",
+    "value": -0.963
+   },
+   {
+    "feature": "adherence_early",
+    "label": "Supplement adherence",
+    "value": -0.313
+   },
+   {
+    "feature": "refr_delta_early",
+    "label": "Early refraction shift",
+    "value": -0.276
+   },
+   {
+    "feature": "stress_mean_early",
+    "label": "Stress level",
+    "value": 0.25
+   },
+   {
+    "feature": "iop_delta_early",
+    "label": "Early IOP change",
+    "value": 0.211
+   },
+   {
+    "feature": "sex_f",
+    "label": "Female",
+    "value": 0.202
+   },
+   {
+    "feature": "cuff_hours_early",
+    "label": "Thigh-cuff hours",
+    "value": -0.175
+   },
+   {
+    "feature": "stress_slope_early",
+    "label": "Stress trend",
+    "value": 0.118
+   },
+   {
+    "feature": "sleep_mean_early",
+    "label": "Sleep duration",
+    "value": 0.114
+   },
+   {
+    "feature": "baseline_refraction",
+    "label": "Baseline refraction",
+    "value": -0.091
+   },
+   {
+    "feature": "genetic_variant",
+    "label": "One-carbon pathway variant",
+    "value": 0.08
+   },
+   {
+    "feature": "baseline_thickness",
+    "label": "Baseline retinal thickness",
+    "value": 0.072
+   },
+   {
+    "feature": "baseline_iop",
+    "label": "Baseline IOP",
+    "value": 0.024
+   },
+   {
+    "feature": "age",
+    "label": "Age",
+    "value": 0.005
+   },
+   {
+    "feature": "blur_mean_early",
+    "label": "Blurred-vision reports",
+    "value": -0.001
+   },
+   {
+    "feature": "venous_events_early",
+    "label": "Venous symptom events",
+    "value": 0.0
+   }
+  ],
+  "AST-002": [
+   {
+    "feature": "thick_slope_early",
+    "label": "Early thickening rate",
+    "value": -0.906
+   },
+   {
+    "feature": "stress_mean_early",
+    "label": "Stress level",
+    "value": 0.845
+   },
+   {
+    "feature": "baseline_refraction",
+    "label": "Baseline refraction",
+    "value": 0.513
+   },
+   {
+    "feature": "refr_delta_early",
+    "label": "Early refraction shift",
+    "value": 0.506
+   },
+   {
+    "feature": "thick_delta_early",
+    "label": "Early retinal thickening",
+    "value": -0.505
+   },
+   {
+    "feature": "sleep_mean_early",
+    "label": "Sleep duration",
+    "value": -0.224
+   },
+   {
+    "feature": "sex_f",
+    "label": "Female",
+    "value": -0.198
+   },
+   {
+    "feature": "cuff_hours_early",
+    "label": "Thigh-cuff hours",
+    "value": 0.176
+   },
+   {
+    "feature": "adherence_early",
+    "label": "Supplement adherence",
+    "value": -0.17
+   },
+   {
+    "feature": "baseline_thickness",
+    "label": "Baseline retinal thickness",
+    "value": -0.163
+   },
+   {
+    "feature": "stress_slope_early",
+    "label": "Stress trend",
+    "value": -0.092
+   },
+   {
+    "feature": "iop_delta_early",
+    "label": "Early IOP change",
+    "value": -0.022
+   },
+   {
+    "feature": "genetic_variant",
+    "label": "One-carbon pathway variant",
+    "value": -0.013
+   },
+   {
+    "feature": "age",
+    "label": "Age",
+    "value": -0.011
+   },
+   {
+    "feature": "blur_mean_early",
+    "label": "Blurred-vision reports",
+    "value": 0.004
+   },
+   {
+    "feature": "baseline_iop",
+    "label": "Baseline IOP",
+    "value": -0.002
+   },
+   {
+    "feature": "venous_events_early",
+    "label": "Venous symptom events",
+    "value": 0.0
+   }
+  ],
+  "AST-003": [
+   {
+    "feature": "thick_slope_early",
+    "label": "Early thickening rate",
+    "value": 4.513
+   },
+   {
+    "feature": "thick_delta_early",
+    "label": "Early retinal thickening",
+    "value": 3.82
+   },
+   {
+    "feature": "refr_delta_early",
+    "label": "Early refraction shift",
+    "value": 3.322
+   },
+   {
+    "feature": "adherence_early",
+    "label": "Supplement adherence",
+    "value": 0.373
+   },
+   {
+    "feature": "stress_mean_early",
+    "label": "Stress level",
+    "value": 0.373
+   },
+   {
+    "feature": "baseline_refraction",
+    "label": "Baseline refraction",
+    "value": 0.323
+   },
+   {
+    "feature": "cuff_hours_early",
+    "label": "Thigh-cuff hours",
+    "value": -0.245
+   },
+   {
+    "feature": "sex_f",
+    "label": "Female",
+    "value": -0.198
+   },
+   {
+    "feature": "sleep_mean_early",
+    "label": "Sleep duration",
+    "value": -0.195
+   },
+   {
+    "feature": "genetic_variant",
+    "label": "One-carbon pathway variant",
+    "value": -0.106
+   },
+   {
+    "feature": "stress_slope_early",
+    "label": "Stress trend",
+    "value": 0.084
+   },
+   {
+    "feature": "iop_delta_early",
+    "label": "Early IOP change",
+    "value": 0.05
+   },
+   {
+    "feature": "baseline_thickness",
+    "label": "Baseline retinal thickness",
+    "value": -0.027
+   },
+   {
+    "feature": "age",
+    "label": "Age",
+    "value": 0.019
+   },
+   {
+    "feature": "baseline_iop",
+    "label": "Baseline IOP",
+    "value": 0.005
+   },
+   {
+    "feature": "blur_mean_early",
+    "label": "Blurred-vision reports",
+    "value": 0.005
+   },
+   {
+    "feature": "venous_events_early",
+    "label": "Venous symptom events",
+    "value": 0.0
+   }
+  ],
+  "AST-004": [
+   {
+    "feature": "thick_slope_early",
+    "label": "Early thickening rate",
+    "value": -2.075
+   },
+   {
+    "feature": "refr_delta_early",
+    "label": "Early refraction shift",
+    "value": -1.684
+   },
+   {
+    "feature": "thick_delta_early",
+    "label": "Early retinal thickening",
+    "value": -1.16
+   },
+   {
+    "feature": "stress_mean_early",
+    "label": "Stress level",
+    "value": -0.457
+   },
+   {
+    "feature": "adherence_early",
+    "label": "Supplement adherence",
+    "value": -0.313
+   },
+   {
+    "feature": "sex_f",
+    "label": "Female",
+    "value": 0.202
+   },
+   {
+    "feature": "stress_slope_early",
+    "label": "Stress trend",
+    "value": 0.16
+   },
+   {
+    "feature": "sleep_mean_early",
+    "label": "Sleep duration",
+    "value": 0.121
+   },
+   {
+    "feature": "cuff_hours_early",
+    "label": "Thigh-cuff hours",
+    "value": 0.106
+   },
+   {
+    "feature": "genetic_variant",
+    "label": "One-carbon pathway variant",
+    "value": 0.08
+   },
+   {
+    "feature": "iop_delta_early",
+    "label": "Early IOP change",
+    "value": 0.058
+   },
+   {
+    "feature": "baseline_thickness",
+    "label": "Baseline retinal thickness",
+    "value": -0.05
+   },
+   {
+    "feature": "baseline_refraction",
+    "label": "Baseline refraction",
+    "value": 0.031
+   },
+   {
+    "feature": "age",
+    "label": "Age",
+    "value": -0.016
+   },
+   {
+    "feature": "baseline_iop",
+    "label": "Baseline IOP",
+    "value": 0.005
+   },
+   {
+    "feature": "blur_mean_early",
+    "label": "Blurred-vision reports",
+    "value": -0.001
+   },
+   {
+    "feature": "venous_events_early",
+    "label": "Venous symptom events",
+    "value": 0.0
+   }
+  ],
+  "AST-005": [
+   {
+    "feature": "thick_slope_early",
+    "label": "Early thickening rate",
+    "value": 2.099
+   },
+   {
+    "feature": "thick_delta_early",
+    "label": "Early retinal thickening",
+    "value": 1.461
+   },
+   {
+    "feature": "refr_delta_early",
+    "label": "Early refraction shift",
+    "value": 0.923
+   },
+   {
+    "feature": "stress_mean_early",
+    "label": "Stress level",
+    "value": 0.375
+   },
+   {
+    "feature": "sex_f",
+    "label": "Female",
+    "value": 0.202
+   },
+   {
+    "feature": "iop_delta_early",
+    "label": "Early IOP change",
+    "value": 0.184
+   },
+   {
+    "feature": "baseline_refraction",
+    "label": "Baseline refraction",
+    "value": -0.169
+   },
+   {
+    "feature": "stress_slope_early",
+    "label": "Stress trend",
+    "value": 0.132
+   },
+   {
+    "feature": "cuff_hours_early",
+    "label": "Thigh-cuff hours",
+    "value": -0.105
+   },
+   {
+    "feature": "baseline_iop",
+    "label": "Baseline IOP",
+    "value": -0.017
+   },
+   {
+    "feature": "sleep_mean_early",
+    "label": "Sleep duration",
+    "value": -0.014
+   },
+   {
+    "feature": "genetic_variant",
+    "label": "One-carbon pathway variant",
+    "value": -0.013
+   },
+   {
+    "feature": "baseline_thickness",
+    "label": "Baseline retinal thickness",
+    "value": 0.011
+   },
+   {
+    "feature": "blur_mean_early",
+    "label": "Blurred-vision reports",
+    "value": -0.005
+   },
+   {
+    "feature": "age",
+    "label": "Age",
+    "value": -0.003
+   },
+   {
+    "feature": "adherence_early",
+    "label": "Supplement adherence",
+    "value": 0.001
+   },
+   {
+    "feature": "venous_events_early",
+    "label": "Venous symptom events",
+    "value": 0.0
+   }
+  ],
+  "AST-006": [
+   {
+    "feature": "thick_slope_early",
+    "label": "Early thickening rate",
+    "value": -2.109
+   },
+   {
+    "feature": "refr_delta_early",
+    "label": "Early refraction shift",
+    "value": -1.424
+   },
+   {
+    "feature": "thick_delta_early",
+    "label": "Early retinal thickening",
+    "value": -1.304
+   },
+   {
+    "feature": "baseline_refraction",
+    "label": "Baseline refraction",
+    "value": -0.252
+   },
+   {
+    "feature": "sex_f",
+    "label": "Female",
+    "value": -0.198
+   },
+   {
+    "feature": "sleep_mean_early",
+    "label": "Sleep duration",
+    "value": 0.192
+   },
+   {
+    "feature": "adherence_early",
+    "label": "Supplement adherence",
+    "value": -0.113
+   },
+   {
+    "feature": "cuff_hours_early",
+    "label": "Thigh-cuff hours",
+    "value": 0.106
+   },
+   {
+    "feature": "stress_mean_early",
+    "label": "Stress level",
+    "value": 0.093
+   },
+   {
+    "feature": "genetic_variant",
+    "label": "One-carbon pathway variant",
+    "value": 0.08
+   },
+   {
+    "feature": "iop_delta_early",
+    "label": "Early IOP change",
+    "value": 0.067
+   },
+   {
+    "feature": "baseline_thickness",
+    "label": "Baseline retinal thickness",
+    "value": 0.04
+   },
+   {
+    "feature": "baseline_iop",
+    "label": "Baseline IOP",
+    "value": -0.029
+   },
+   {
+    "feature": "age",
+    "label": "Age",
+    "value": -0.024
+   },
+   {
+    "feature": "stress_slope_early",
+    "label": "Stress trend",
+    "value": -0.023
+   },
+   {
+    "feature": "blur_mean_early",
+    "label": "Blurred-vision reports",
+    "value": -0.001
+   },
+   {
+    "feature": "venous_events_early",
+    "label": "Venous symptom events",
+    "value": 0.0
+   }
+  ]
+ },
+ "anomalies": [],
+ "alerts": [
+  {
+   "astronaut_id": "AST-003",
+   "level": "URGENT",
+   "rule": "retinal_thickness",
+   "value": 41.9,
+   "threshold": 40.0,
+   "message": "Retinal thickening above urgent threshold."
+  },
+  {
+   "astronaut_id": "AST-003",
+   "level": "URGENT",
+   "rule": "refraction_shift",
+   "value": 1.12,
+   "threshold": 0.75,
+   "message": "Hyperopic shift above urgent threshold."
+  },
+  {
+   "astronaut_id": "AST-003",
+   "level": "WATCH",
+   "rule": "model_risk",
+   "value": 0.92,
+   "threshold": 0.5,
+   "message": "Prediction model estimates a high probability of significant SANS-like change."
+  },
+  {
+   "astronaut_id": "AST-005",
+   "level": "WATCH",
+   "rule": "retinal_thickness",
+   "value": 25.1,
+   "threshold": 25.0,
+   "message": "Retinal thickening above watch threshold."
+  },
+  {
+   "astronaut_id": "AST-005",
+   "level": "WATCH",
+   "rule": "refraction_shift",
+   "value": 0.68,
+   "threshold": 0.5,
+   "message": "Hyperopic shift above watch threshold."
+  },
+  {
+   "astronaut_id": "AST-005",
+   "level": "WATCH",
+   "rule": "model_risk",
+   "value": 0.76,
+   "threshold": 0.5,
+   "message": "Prediction model estimates a high probability of significant SANS-like change."
+  }
+ ]
+}

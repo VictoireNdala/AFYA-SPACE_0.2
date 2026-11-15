@@ -1,0 +1,1287 @@
+{
+ "studies": [
+  "OSD-817",
+  "OSD-815",
+  "LSDS-135",
+  "LSDS-132"
+ ],
+ "reference": "Peng M. et al., npj Microgravity 8, 44 (2022), doi:10.1038/s41526-022-00232-5",
+ "groups": {
+  "1": {
+   "label": "G1  12:16 (Earth average)",
+   "icp": 12,
+   "iop": 16,
+   "tilt": 0
+  },
+  "2": {
+   "label": "G2  15:16",
+   "icp": 15,
+   "iop": 16,
+   "tilt": 0
+  },
+  "3": {
+   "label": "G3  12:21 then 12:16",
+   "icp": 12,
+   "iop": 21,
+   "tilt": 0
+  },
+  "4": {
+   "label": "G4  21:16 (high ICP)",
+   "icp": 21,
+   "iop": 16,
+   "tilt": 0
+  },
+  "5": {
+   "label": "G5  15:16, 6° tilt",
+   "icp": 15,
+   "iop": 16,
+   "tilt": 6
+  },
+  "6": {
+   "label": "G6  15:16, 10° tilt",
+   "icp": 15,
+   "iop": 16,
+   "tilt": 10
+  }
+ },
+ "measures": {
+  "ctb_counts": "CTB retrograde transport (counts)",
+  "tunel_counts": "TUNEL-positive cells (counts)",
+  "ihc_COLIV": "IHC COLIV (0-3)",
+  "ihc_LAM": "IHC LAM (0-3)",
+  "ihc_FN": "IHC FN (0-3)",
+  "ihc_GFAP": "IHC GFAP (0-3)",
+  "ihc_TNFA": "IHC TNFa (0-3)",
+  "ihc_TLR4": "IHC TLR4 (0-3)",
+  "fn_iop": "FN in IOP chamber medium (densitometry)",
+  "fn_icp": "FN in ICP chamber medium (densitometry)",
+  "coliv_iop": "COLIV in IOP chamber medium (densitometry)",
+  "coliv_icp": "COLIV in ICP chamber medium (densitometry)"
+ },
+ "eyes": [
+  {
+   "eye_id": "18004_OS",
+   "donor": "18004",
+   "sex": "Male",
+   "age": 82,
+   "group": 1,
+   "ctb_counts": 281,
+   "tunel_counts": 347,
+   "ihc_COLIV": 3,
+   "ihc_LAM": 3,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 1,
+   "fn_iop": 61199.309,
+   "fn_icp": 89527.454,
+   "coliv_iop": 128427.387,
+   "coliv_icp": 88413.642
+  },
+  {
+   "eye_id": "22536_OS",
+   "donor": "22536",
+   "sex": "Male",
+   "age": 77,
+   "group": 1,
+   "ctb_counts": 1046,
+   "tunel_counts": 563,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 2,
+   "ihc_FN": 1,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 187333.551,
+   "fn_icp": 190504.915,
+   "coliv_iop": 186745.681,
+   "coliv_icp": 207202.891
+  },
+  {
+   "eye_id": "7346_OS",
+   "donor": "7346",
+   "sex": "Female",
+   "age": 64,
+   "group": 1,
+   "ctb_counts": 154,
+   "tunel_counts": 336,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 3,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 2,
+   "ihc_TLR4": 2,
+   "fn_iop": 130506.643,
+   "fn_icp": 127249.789,
+   "coliv_iop": 69655.161,
+   "coliv_icp": 74693.065
+  },
+  {
+   "eye_id": "15373_OD",
+   "donor": "15373",
+   "sex": "Female",
+   "age": 86,
+   "group": 2,
+   "ctb_counts": 128,
+   "tunel_counts": 356,
+   "ihc_COLIV": 1,
+   "ihc_LAM": 3,
+   "ihc_FN": 2,
+   "ihc_GFAP": 2,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 179045.434,
+   "fn_icp": 162926.517,
+   "coliv_iop": 32906.933,
+   "coliv_icp": 71679.082
+  },
+  {
+   "eye_id": "20779_OD",
+   "donor": "20779",
+   "sex": "Male",
+   "age": 78,
+   "group": 2,
+   "ctb_counts": 209,
+   "tunel_counts": 512,
+   "ihc_COLIV": 3,
+   "ihc_LAM": 2,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 18193.933,
+   "fn_icp": 21073.217,
+   "coliv_iop": 106760.458,
+   "coliv_icp": 152476.156
+  },
+  {
+   "eye_id": "32115_OD",
+   "donor": "32115",
+   "sex": "Male",
+   "age": 77,
+   "group": 2,
+   "ctb_counts": 63,
+   "tunel_counts": 318,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 2,
+   "ihc_FN": 1,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 3,
+   "ihc_TLR4": 1,
+   "fn_iop": 120552.602,
+   "fn_icp": 186152.534,
+   "coliv_iop": 23535.861,
+   "coliv_icp": 80675.132
+  },
+  {
+   "eye_id": "15373_OS",
+   "donor": "15373",
+   "sex": "Female",
+   "age": 86,
+   "group": 3,
+   "ctb_counts": 170,
+   "tunel_counts": 489,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 3,
+   "ihc_FN": 3,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 179206.555,
+   "fn_icp": 186061.735,
+   "coliv_iop": 51757.279,
+   "coliv_icp": 40103.731
+  },
+  {
+   "eye_id": "20779_OS",
+   "donor": "20779",
+   "sex": "Male",
+   "age": 78,
+   "group": 3,
+   "ctb_counts": 177,
+   "tunel_counts": 849,
+   "ihc_COLIV": 1,
+   "ihc_LAM": 2,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 2,
+   "ihc_TLR4": 1,
+   "fn_iop": 178695.827,
+   "fn_icp": 95009.149,
+   "coliv_iop": 101204.742,
+   "coliv_icp": 107906.248
+  },
+  {
+   "eye_id": "32115_OS",
+   "donor": "32115",
+   "sex": "Male",
+   "age": 77,
+   "group": 3,
+   "ctb_counts": 313,
+   "tunel_counts": 123,
+   "ihc_COLIV": 3,
+   "ihc_LAM": 2,
+   "ihc_FN": 3,
+   "ihc_GFAP": 2,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 122229.362,
+   "fn_icp": 158241.759,
+   "coliv_iop": 14759.82,
+   "coliv_icp": 37730.359
+  },
+  {
+   "eye_id": "15380_OD",
+   "donor": "15380",
+   "sex": "Female",
+   "age": 89,
+   "group": 4,
+   "ctb_counts": 414,
+   "tunel_counts": 146,
+   "ihc_COLIV": 3,
+   "ihc_LAM": 2,
+   "ihc_FN": 3,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 151680.676,
+   "fn_icp": 173691.442,
+   "coliv_iop": 154647.881,
+   "coliv_icp": 136147.588
+  },
+  {
+   "eye_id": "22196_OD",
+   "donor": "22196",
+   "sex": "Female",
+   "age": 55,
+   "group": 4,
+   "ctb_counts": 382,
+   "tunel_counts": 562,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 3,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 1,
+   "fn_iop": 191343.631,
+   "fn_icp": 189227.007,
+   "coliv_iop": 148652.706,
+   "coliv_icp": 148446.484
+  },
+  {
+   "eye_id": "34085_OD",
+   "donor": "34085",
+   "sex": "Male",
+   "age": 87,
+   "group": 4,
+   "ctb_counts": 1121,
+   "tunel_counts": 1560,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 3,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 153305.655,
+   "fn_icp": 160945.366,
+   "coliv_iop": 61530.856,
+   "coliv_icp": 68110.898
+  },
+  {
+   "eye_id": "15380_OS",
+   "donor": "15380",
+   "sex": "Female",
+   "age": 89,
+   "group": 5,
+   "ctb_counts": 77,
+   "tunel_counts": 255,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 0,
+   "ihc_FN": 0,
+   "ihc_GFAP": 0,
+   "ihc_TNFA": 0,
+   "ihc_TLR4": 1,
+   "fn_iop": 19078.882,
+   "fn_icp": 56616.087,
+   "coliv_iop": 183778.572,
+   "coliv_icp": 188870.785
+  },
+  {
+   "eye_id": "22196_OS",
+   "donor": "22196",
+   "sex": "Female",
+   "age": 55,
+   "group": 5,
+   "ctb_counts": 240,
+   "tunel_counts": 679,
+   "ihc_COLIV": 3,
+   "ihc_LAM": 3,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 1,
+   "fn_iop": 142419.882,
+   "fn_icp": 139313.418,
+   "coliv_iop": 118262.563,
+   "coliv_icp": 167125.241
+  },
+  {
+   "eye_id": "34085_OS",
+   "donor": "34085",
+   "sex": "Male",
+   "age": 87,
+   "group": 5,
+   "ctb_counts": 1036,
+   "tunel_counts": 682,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 2,
+   "ihc_FN": 3,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 1,
+   "fn_iop": 54998.815,
+   "fn_icp": 127637.006,
+   "coliv_iop": 10067.335,
+   "coliv_icp": 35808.702
+  },
+  {
+   "eye_id": "18004_OD",
+   "donor": "18004",
+   "sex": "Male",
+   "age": 82,
+   "group": 6,
+   "ctb_counts": 308,
+   "tunel_counts": 708,
+   "ihc_COLIV": 3,
+   "ihc_LAM": 2,
+   "ihc_FN": 2,
+   "ihc_GFAP": 1,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 1,
+   "fn_iop": 95838.836,
+   "fn_icp": 112621.233,
+   "coliv_iop": 70384.442,
+   "coliv_icp": 69996.404
+  },
+  {
+   "eye_id": "22536_OD",
+   "donor": "22536",
+   "sex": "Male",
+   "age": 77,
+   "group": 6,
+   "ctb_counts": 142,
+   "tunel_counts": 101,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 3,
+   "ihc_FN": 3,
+   "ihc_GFAP": 3,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 0,
+   "fn_iop": 110994.922,
+   "fn_icp": 148776.451,
+   "coliv_iop": 201713.56,
+   "coliv_icp": 183414.543
+  },
+  {
+   "eye_id": "7346_OD",
+   "donor": "7346",
+   "sex": "Female",
+   "age": 64,
+   "group": 6,
+   "ctb_counts": 202,
+   "tunel_counts": 200,
+   "ihc_COLIV": 2,
+   "ihc_LAM": 3,
+   "ihc_FN": 2,
+   "ihc_GFAP": 2,
+   "ihc_TNFA": 1,
+   "ihc_TLR4": 2,
+   "fn_iop": 110938.054,
+   "fn_icp": 121340.108,
+   "coliv_iop": 9097.698,
+   "coliv_icp": 18652.075
+  }
+ ],
+ "summaries": {
+  "ctb_counts": {
+   "label": "CTB retrograde transport (counts)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 493.667,
+     "std": 482.531,
+     "count": 3,
+     "min": 154,
+     "max": 1046,
+     "sem": 278.59,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 133.333,
+     "std": 73.146,
+     "count": 3,
+     "min": 63,
+     "max": 209,
+     "sem": 42.231,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 220.0,
+     "std": 80.616,
+     "count": 3,
+     "min": 170,
+     "max": 313,
+     "sem": 46.544,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 639.0,
+     "std": 417.731,
+     "count": 3,
+     "min": 382,
+     "max": 1121,
+     "sem": 241.177,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 451.0,
+     "std": 513.138,
+     "count": 3,
+     "min": 77,
+     "max": 1036,
+     "sem": 296.261,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 217.333,
+     "std": 84.056,
+     "count": 3,
+     "min": 142,
+     "max": 308,
+     "sem": 48.529,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "tunel_counts": {
+   "label": "TUNEL-positive cells (counts)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 415.333,
+     "std": 128.001,
+     "count": 3,
+     "min": 336,
+     "max": 563,
+     "sem": 73.902,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 395.333,
+     "std": 102.807,
+     "count": 3,
+     "min": 318,
+     "max": 512,
+     "sem": 59.356,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 487.0,
+     "std": 363.004,
+     "count": 3,
+     "min": 123,
+     "max": 849,
+     "sem": 209.581,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 756.0,
+     "std": 726.688,
+     "count": 3,
+     "min": 146,
+     "max": 1560,
+     "sem": 419.554,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 538.667,
+     "std": 245.667,
+     "count": 3,
+     "min": 255,
+     "max": 682,
+     "sem": 141.836,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 336.333,
+     "std": 325.657,
+     "count": 3,
+     "min": 101,
+     "max": 708,
+     "sem": 188.018,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "ihc_COLIV": {
+   "label": "IHC COLIV (0-3)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 2.0,
+     "std": 1.0,
+     "count": 3,
+     "min": 1,
+     "max": 3,
+     "sem": 0.577,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 2.0,
+     "std": 1.0,
+     "count": 3,
+     "min": 1,
+     "max": 3,
+     "sem": 0.577,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "ihc_LAM": {
+   "label": "IHC LAM (0-3)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 2.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 2.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 1.667,
+     "std": 1.528,
+     "count": 3,
+     "min": 0,
+     "max": 3,
+     "sem": 0.882,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 2.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "ihc_FN": {
+   "label": "IHC FN (0-3)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 1.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 1.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 2.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 1.667,
+     "std": 1.528,
+     "count": 3,
+     "min": 0,
+     "max": 3,
+     "sem": 0.882,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 2.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 2,
+     "max": 3,
+     "sem": 0.333,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "ihc_GFAP": {
+   "label": "IHC GFAP (0-3)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 1.0,
+     "std": 0.0,
+     "count": 3,
+     "min": 1,
+     "max": 1,
+     "sem": 0.0,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 1.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 1.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 1.0,
+     "std": 0.0,
+     "count": 3,
+     "min": 1,
+     "max": 1,
+     "sem": 0.0,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 0.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 0,
+     "max": 1,
+     "sem": 0.333,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 2.0,
+     "std": 1.0,
+     "count": 3,
+     "min": 1,
+     "max": 3,
+     "sem": 0.577,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "ihc_TNFA": {
+   "label": "IHC TNFa (0-3)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 1.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 1.667,
+     "std": 1.155,
+     "count": 3,
+     "min": 1,
+     "max": 3,
+     "sem": 0.667,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 1.333,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 1.0,
+     "std": 0.0,
+     "count": 3,
+     "min": 1,
+     "max": 1,
+     "sem": 0.0,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 0.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 0,
+     "max": 1,
+     "sem": 0.333,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 1.0,
+     "std": 0.0,
+     "count": 3,
+     "min": 1,
+     "max": 1,
+     "sem": 0.0,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "ihc_TLR4": {
+   "label": "IHC TLR4 (0-3)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 1.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 1.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 1.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 1.667,
+     "std": 0.577,
+     "count": 3,
+     "min": 1,
+     "max": 2,
+     "sem": 0.333,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 1.0,
+     "std": 0.0,
+     "count": 3,
+     "min": 1,
+     "max": 1,
+     "sem": 0.0,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 1.0,
+     "std": 1.0,
+     "count": 3,
+     "min": 0,
+     "max": 2,
+     "sem": 0.577,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "fn_iop": {
+   "label": "FN in IOP chamber medium (densitometry)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 126346.501,
+     "std": 63169.944,
+     "count": 3,
+     "min": 61199.309,
+     "max": 187333.551,
+     "sem": 36471.184,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 105930.656,
+     "std": 81416.536,
+     "count": 3,
+     "min": 18193.933,
+     "max": 179045.434,
+     "sem": 47005.859,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 160043.915,
+     "std": 32749.359,
+     "count": 3,
+     "min": 122229.362,
+     "max": 179206.555,
+     "sem": 18907.851,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 165443.321,
+     "std": 22445.037,
+     "count": 3,
+     "min": 151680.676,
+     "max": 191343.631,
+     "sem": 12958.648,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 72165.86,
+     "std": 63437.222,
+     "count": 3,
+     "min": 19078.882,
+     "max": 142419.882,
+     "sem": 36625.497,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 105923.937,
+     "std": 8734.0,
+     "count": 3,
+     "min": 95838.836,
+     "max": 110994.922,
+     "sem": 5042.577,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "fn_icp": {
+   "label": "FN in ICP chamber medium (densitometry)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 135760.719,
+     "std": 51023.905,
+     "count": 3,
+     "min": 89527.454,
+     "max": 190504.915,
+     "sem": 29458.665,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 123384.089,
+     "std": 89361.613,
+     "count": 3,
+     "min": 21073.217,
+     "max": 186152.534,
+     "sem": 51592.951,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 146437.548,
+     "std": 46659.918,
+     "count": 3,
+     "min": 95009.149,
+     "max": 186061.735,
+     "sem": 26939.116,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 174621.272,
+     "std": 14163.73,
+     "count": 3,
+     "min": 160945.366,
+     "max": 189227.007,
+     "sem": 8177.433,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 107855.504,
+     "std": 44757.044,
+     "count": 3,
+     "min": 56616.087,
+     "max": 139313.418,
+     "sem": 25840.492,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 127579.264,
+     "std": 18867.836,
+     "count": 3,
+     "min": 112621.233,
+     "max": 148776.451,
+     "sem": 10893.35,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "coliv_iop": {
+   "label": "COLIV in IOP chamber medium (densitometry)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 128276.076,
+     "std": 58545.407,
+     "count": 3,
+     "min": 69655.161,
+     "max": 186745.681,
+     "sem": 33801.206,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 54401.084,
+     "std": 45585.988,
+     "count": 3,
+     "min": 23535.861,
+     "max": 106760.458,
+     "sem": 26319.082,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 55907.28,
+     "std": 43371.627,
+     "count": 3,
+     "min": 14759.82,
+     "max": 101204.742,
+     "sem": 25040.62,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 121610.481,
+     "std": 52116.759,
+     "count": 3,
+     "min": 61530.856,
+     "max": 154647.881,
+     "sem": 30089.625,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 104036.157,
+     "std": 87725.09,
+     "count": 3,
+     "min": 10067.335,
+     "max": 183778.572,
+     "sem": 50648.104,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 93731.9,
+     "std": 98407.548,
+     "count": 3,
+     "min": 9097.698,
+     "max": 201713.56,
+     "sem": 56815.624,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  },
+  "coliv_icp": {
+   "label": "COLIV in ICP chamber medium (densitometry)",
+   "groups": [
+    {
+     "group": 1,
+     "mean": 123436.533,
+     "std": 72867.453,
+     "count": 3,
+     "min": 74693.065,
+     "max": 207202.891,
+     "sem": 42070.043,
+     "label": "G1  12:16 (Earth average)"
+    },
+    {
+     "group": 2,
+     "mean": 101610.123,
+     "std": 44280.325,
+     "count": 3,
+     "min": 71679.082,
+     "max": 152476.156,
+     "sem": 25565.258,
+     "label": "G2  15:16"
+    },
+    {
+     "group": 3,
+     "mean": 61913.446,
+     "std": 39848.609,
+     "count": 3,
+     "min": 37730.359,
+     "max": 107906.248,
+     "sem": 23006.605,
+     "label": "G3  12:21 then 12:16"
+    },
+    {
+     "group": 4,
+     "mean": 117568.323,
+     "std": 43270.584,
+     "count": 3,
+     "min": 68110.898,
+     "max": 148446.484,
+     "sem": 24982.283,
+     "label": "G4  21:16 (high ICP)"
+    },
+    {
+     "group": 5,
+     "mean": 130601.576,
+     "std": 82809.926,
+     "count": 3,
+     "min": 35808.702,
+     "max": 188870.785,
+     "sem": 47810.333,
+     "label": "G5  15:16, 6° tilt"
+    },
+    {
+     "group": 6,
+     "mean": 90687.674,
+     "std": 84307.557,
+     "count": 3,
+     "min": 18652.075,
+     "max": 183414.543,
+     "sem": 48674.991,
+     "label": "G6  15:16, 10° tilt"
+    }
+   ]
+  }
+ },
+ "tests": [
+  {
+   "measure": "ctb_counts",
+   "label": "CTB retrograde transport (counts)",
+   "kruskal_H": 7.36,
+   "p_value": 0.195,
+   "significant_p05": false
+  },
+  {
+   "measure": "tunel_counts",
+   "label": "TUNEL-positive cells (counts)",
+   "kruskal_H": 1.33,
+   "p_value": 0.932,
+   "significant_p05": false
+  },
+  {
+   "measure": "ihc_COLIV",
+   "label": "IHC COLIV (0-3)",
+   "kruskal_H": 0.71,
+   "p_value": 0.983,
+   "significant_p05": false
+  },
+  {
+   "measure": "ihc_LAM",
+   "label": "IHC LAM (0-3)",
+   "kruskal_H": 2.42,
+   "p_value": 0.788,
+   "significant_p05": false
+  },
+  {
+   "measure": "ihc_FN",
+   "label": "IHC FN (0-3)",
+   "kruskal_H": 5.15,
+   "p_value": 0.398,
+   "significant_p05": false
+  },
+  {
+   "measure": "ihc_GFAP",
+   "label": "IHC GFAP (0-3)",
+   "kruskal_H": 7.16,
+   "p_value": 0.209,
+   "significant_p05": false
+  },
+  {
+   "measure": "ihc_TNFA",
+   "label": "IHC TNFa (0-3)",
+   "kruskal_H": 4.87,
+   "p_value": 0.432,
+   "significant_p05": false
+  },
+  {
+   "measure": "ihc_TLR4",
+   "label": "IHC TLR4 (0-3)",
+   "kruskal_H": 4.56,
+   "p_value": 0.472,
+   "significant_p05": false
+  },
+  {
+   "measure": "fn_iop",
+   "label": "FN in IOP chamber medium (densitometry)",
+   "kruskal_H": 7.18,
+   "p_value": 0.208,
+   "significant_p05": false
+  },
+  {
+   "measure": "fn_icp",
+   "label": "FN in ICP chamber medium (densitometry)",
+   "kruskal_H": 4.23,
+   "p_value": 0.517,
+   "significant_p05": false
+  },
+  {
+   "measure": "coliv_iop",
+   "label": "COLIV in IOP chamber medium (densitometry)",
+   "kruskal_H": 3.64,
+   "p_value": 0.602,
+   "significant_p05": false
+  },
+  {
+   "measure": "coliv_icp",
+   "label": "COLIV in ICP chamber medium (densitometry)",
+   "kruskal_H": 2.71,
+   "p_value": 0.745,
+   "significant_p05": false
+  }
+ ],
+ "consistency_issues": [],
+ "paper_label_check": [
+  {
+   "assay": "ctb_counts",
+   "r_same_labels": -0.23,
+   "r_paper_Gk_vs_OSDR_G(k-1)": 1.0
+  },
+  {
+   "assay": "tunel_counts",
+   "r_same_labels": 0.22,
+   "r_paper_Gk_vs_OSDR_G(k-1)": 1.0
+  }
+ ],
+ "osd815_samples": 44
+}

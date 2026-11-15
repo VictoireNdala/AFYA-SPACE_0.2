@@ -1,0 +1,21 @@
+{
+  "name": "sans-guardian-server",
+  "version": "1.0.0",
+  "description": "SANS Guardian onboard server: SANS monitoring API, live vitals stream and simulated radio sync (research prototype, simulated data).",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "simulate": "node scripts/simulate.js",
+    "export-model": "node scripts/export-model-input.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
+  }
+}
