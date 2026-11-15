@@ -1,53 +1,94 @@
-# AFYA-SPACE: crew analysis module
+# SANS Guardian
+Offline-first monitoring prototype to support prevention, early detection and management of Spaceflight Associated Neuro-ocular Syndrome (SANS) during long-duration space missions.
 
-Analyses crew data (visual and mental health indicators) and shows the results on a dashboard:
-predicted risk of significant SANS-like change, anomalies, alerts and a wellbeing index.
+Built for the NASA Space Apps Challenge 2026 - Lubumbashi, DRC.
 
-> **Research prototype. Not a medical device. All data is simulated.** Thresholds and the risk model are demo values.
+Research prototype. Not a medical device. All data is simulated. SANS has no established treatment and its exact cause is unknown. SANS Guardian does not diagnose, prescribe or choose doses. Protocols and alert thresholds are configurable by the medical team; defaults in this repository are demo values.
 
-## Quick start
+## Crew analysis module
 
-```bash
-pip install -r requirements.txt
+This repository also includes a crew-analysis prototype for simulated SANS-related data. It predicts risk, flags anomalies, generates alerts and displays a wellbeing index. See [docs/CREW_ANALYSIS.md](docs/CREW_ANALYSIS.md) for its setup, methods and limitations.
 
-# 1. Simulate crew data (200 historical missions + 8 astronauts currently in mission)
-python -m sans.simulate --n_hist 200 --n_current 8 --seed 42
+Why this matters
+Weightlessness shifts about 2 liters of fluid toward the upper body (NASA Cardiovascular and Vision Laboratory).
+About 70% of ISS astronauts on ~6-month missions show SANS findings, and about 20% develop clinically significant SANS.
+Findings include optic disc swelling, choroidal folds, retinal thickening, globe flattening and refraction changes of up to about 1.5 diopters. SANS can occur without symptoms the astronaut notices, so objective measurements matter.
+NASA is studying countermeasures: a B-vitamin supplement (folate, B6, B12, riboflavin), veno-constrictive thigh cuffs and lower body negative pressure (LBNP). Their effectiveness is still under investigation.
+Missions to the Moon and Mars mean limited and delayed contact with Earth, so monitoring has to work offline.
+What SANS Guardian does
+Role	Feature
+Prevention	Pre-flight risk profile (explainable score), B-vitamin schedule and adherence tracking, thigh-cuff and LBNP session tracking with safety questionnaire, exam calendar
+Detection	Daily vision log, trends of retinal thickness / refraction / intraocular pressure vs. baseline, venous-symptom monitoring
+Management	Graded alerts to flight surgeons, spare-glasses management, post-flight recovery tracking (30 days, 90 days, 6 months), end-of-mission PDF report
+Operations	Offline storage, prioritized low-bandwidth sync over a simulated radio link (MQTT), local voice assistant, realistic simulated data
+Architecture
+Astronaut (voice / UI) -> Local API (FastAPI) -> SQLite (local)
+                                   |
+                         Priority sync queue (zlib)
+                                   |
+              Simulated radio window  -- MQTT -->  Ground station (ground.db)
+                                   |
+                          Streamlit dashboard (flight surgeons)
+Details: docs/ARCHITECTURE.md.
 
-# 2. Run the analysis (writes results to outputs/)
-python -m sans.pipeline --data data/sans_crew_daily.csv --out outputs
+Tech stack
+Python 3.11+, FastAPI, SQLAlchemy, SQLite, Streamlit, Plotly, paho-mqtt (Mosquitto), Faster-Whisper and Piper (optional offline voice), pytest, ruff.
 
-# 3. Open the dashboard (it also runs the analysis itself)
+Quick start
+git clone <your-repo-url> sans-guardian
+cd sans-guardian
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+
+# 1. Generate simulated crew data (180-day mission, fixed seed)
+python -m sans_guardian.simulation.generate --n 8 --seed 42
+
+# 2. Start the local API
+uvicorn sans_guardian.api.main:app --reload
+
+# 3. Start the dashboard (new terminal)
 streamlit run dashboard/app.py
-```
 
-## How it works
+# 4. Optional: ground station + MQTT broker
+docker compose up -d mosquitto
+python -m sans_guardian.sync.ground
+Without Docker, the app falls back to a SQLite queue and the built-in radio simulator.
 
-| Step | File | What it does |
-|---|---|---|
-| Data | `sans/simulate.py` | Daily data: OCT retinal thickness, refraction, IOP, blur score, supplement intake, thigh-cuff hours, venous symptoms, sleep, stress |
-| Features | `sans/features.py` | Per-astronaut features from the **first 60 days only** (no outcome leakage) |
-| Prediction | `sans/pipeline.py` | Compares Logistic Regression, Random Forest, Gradient Boosting (and XGBoost if installed) with 5-fold CV, keeps the best ROC-AUC, scores the current crew |
-| Explanation | `sans/pipeline.py` | Linear-model contributions: which factors raise or lower each astronaut's risk |
-| Anomalies | `sans/pipeline.py` | Isolation Forest on measurement residuals, shown as red markers on the charts |
-| Alerts | `sans/pipeline.py` | Rule-based WATCH / URGENT alerts (retinal thickness, refraction, adherence, venous symptom, stress, sleep, model risk) |
-| NASA data | `sans/osdr.py` | Loads NASA OSDR GLDS-700 RT-PCR (human retina): relative expression of apoptosis, inflammation and retinal markers, kit-concordance QC |
-| NASA data (TAS) | `sans/tas.py` | OSD-817 / OSD-815 / LSDS-135 / LSDS-132: optic nerve measurements of the ex vivo SANS model by pressure group (18 eyes, 6 groups), group tests, labeling cross-check |
-| Dashboard | `dashboard/app.py` | Crew overview, astronaut detail, alerts, model and method, NASA OSDR reference, TAS experiment |
+Optional voice: install the extra models for Faster-Whisper and Piper (see docs/ARCHITECTURE.md). Without them, the Voice console accepts typed commands.
 
-Run `python -m sans.tas` for the TAS experiment tables (saved to `outputs/tas_eye_table.csv` and `outputs/tas_group_tests.csv`). Run `python -m sans.osdr` to print the OSDR expression table (saved to `outputs/osdr_glds700_expression.csv`).
+3-minute demo script
+Overview: show the crew list, risk levels and the permanent research-prototype banner.
+High-risk astronaut: open the explained risk score and the retinal-thickness drift vs. baseline.
+Alert: show the graded alert (rule, value, threshold) raised by the drift.
+Thigh-cuff session: run a session; tick a venous symptom in the safety questionnaire and show the immediate URGENT alert.
+Link & Sync: watch the priority queue empty during a radio window (critical alerts first).
+Voice: say or type "log supplement taken" and see the adherence update.
+Report: generate the end-of-mission PDF.
+Configuration
+Edit config/protocol.yaml to change the supplement schedule offsets, session durations, alert thresholds, risk weights and radio-window settings. All defaults are demo values, not clinical recommendations.
 
-Outputs in `outputs/`: `crew_summary.csv`, `alerts.csv`, `anomalies.csv`, `model_metrics.csv`, `feature_importance.csv`, `crew_contributions.csv`, `run_info.json`.
+Tests
+pytest
+ruff check .
+Data sources and references
+NASA Human Research Program: Risk of Spaceflight Associated Neuro-ocular Syndrome (SANS)
+NASA: What Is Spaceflight Associated Neuro-ocular Syndrome? (infographic)
+NASA: Thigh Cuff study (Mitigating Headward Fluid Shifts with Veno-constrictive Thigh Cuffs during Spaceflight)
+NASA Human Health and Performance: Cardiovascular and Vision Laboratory
+NASA, Houston We Have a Podcast, episode 351, "Let's B-Complex"
+NASA Open Science Data Repository (OSDR) and Life Sciences data, used to inspire the structure of the simulated data (see docs/DATA_SOURCES.md for exactly what is used)
+Full report (French): docs/Rapport_SANS.pdf.
 
-## Using your own data
+Limitations
+Simulated data only; the risk score and thresholds are not clinically validated.
+B vitamins, thigh cuffs and LBNP are NASA research avenues, not proven treatments.
+Thigh cuffs act on venous circulation, and NASA has observed slow venous flow and a blood clot in crew members; any use requires medical supervision.
+Authentication is a static token, suitable for a prototype only.
+Use of AI
+This project was developed with the assistance of Claude (Anthropic) for research synthesis, specification and code generation. See docs/DATA_SOURCES.md.
 
-Provide a CSV with the columns listed in `sans/config.py` (`DATA_COLUMNS`). `cohort` is `historical` (complete missions with a `sans_significant` 0/1 outcome, at least 30 astronauts) or `current` (missions in progress, outcome empty). Upload it from the dashboard sidebar.
+License
+Choose a license before publishing (for example MIT) and add a LICENSE file.
 
-## Important limits
-
-- The high cross-validated AUC measures the pipeline on **simulated data built with the simulation's own assumptions**. It does not show that SANS can be predicted that accurately in real astronauts.
-- The outcome definition, alert thresholds and wellbeing index are demo values to be set by medical experts.
-- The OSDR GLDS-700 plate 1 holds one control sample with two RT kits: it is a reference profile, not a comparison of conditions, and is not used for training.
-- The TAS experiment has 3 donor eyes per group and no significant group difference; the OSDR group labels differ from the paper's figures by one position (see `docs/DATA_SOURCES.md`). Neither is used for training.
-- Real validation would need real, ethically approved astronaut data (for example from NASA OSDR / Life Sciences archives).
-
-The original course exercises are kept in `README_original_exercises.md` and `main.py` is unchanged.
+Team
+NASA Space Apps Challenge Lubumbashi 2026 team: AFYA SPACE.
