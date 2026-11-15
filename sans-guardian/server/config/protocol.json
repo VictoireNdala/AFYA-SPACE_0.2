@@ -1,0 +1,121 @@
+{
+  "_notice": "DEMO VALUES. Every threshold, duration, weight and schedule below is a demonstration placeholder, NOT a clinical recommendation. The medical team owns and must set these values.",
+
+  "mission": {
+    "name": "Long-duration mission (simulated)",
+    "launchDate": "2026-03-02",
+    "missionDays": 180,
+    "postFlightDays": 180,
+    "defaultDay": 130
+  },
+
+  "supplement": {
+    "label": "B-vitamin supplement (folate, B6, B12, riboflavin)",
+    "source": "NASA B-vitamin study protocol: one pill per day, from ~6 months before flight to 30 days after landing",
+    "startOffsetDays": -180,
+    "endDaysAfterLanding": 30,
+    "pillsPerDay": 1,
+    "adherenceWatchBelowPct": 80
+  },
+
+  "countermeasures": {
+    "THIGH_CUFF": {
+      "label": "Veno-constrictive thigh cuffs",
+      "source": "NASA Thigh Cuff study: 2 sessions of 6 hours with leg and neck vein ultrasound",
+      "targetMinutes": 360,
+      "parameterLabel": "Cuff pressure",
+      "parameterUnit": "mmHg",
+      "defaultParameter": 40,
+      "parameterIsDemo": true
+    },
+    "LBNP": {
+      "label": "Lower body negative pressure",
+      "source": "Tested in the NASA Fluid Shifts study; session parameters here are demo values",
+      "targetMinutes": 30,
+      "parameterLabel": "Chamber pressure",
+      "parameterUnit": "mmHg",
+      "defaultParameter": -25,
+      "parameterIsDemo": true
+    }
+  },
+
+  "safetySignals": [
+    { "id": "limb_pain", "label": "Pain in an arm or leg" },
+    { "id": "limb_swelling", "label": "Swelling of an arm or leg" },
+    { "id": "limb_redness", "label": "Redness or warmth of an arm or leg" },
+    { "id": "neck_swelling", "label": "Swelling or discomfort in the neck" },
+    { "id": "other", "label": "Any other new or unusual symptom" }
+  ],
+
+  "thresholds": {
+    "RETINA_DELTA_UM": { "label": "Total retinal thickness change vs baseline", "unit": "µm", "watch": 20, "urgent": 40 },
+    "REFRACTION_DELTA_D": { "label": "Refraction change vs baseline", "unit": "D", "watch": 0.5, "urgent": 1.0 },
+    "IOP_MMHG": { "label": "Intraocular pressure", "unit": "mmHg", "watch": 21, "urgent": 25 },
+    "PERSISTENT_RETINA_UM": { "label": "Persistent change after landing", "unit": "µm", "watch": 10 },
+    "EXAM_GRACE_DAYS": 5
+  },
+
+  "risk": {
+    "weights": { "genetics": 30, "duration": 20, "adherence": 20, "trend": 30 },
+    "durationReferenceDays": 365,
+    "levels": { "moderate": 35, "high": 65 },
+    "disclaimer": "Indicative score for prioritising follow-up. Built on simulated data. Not clinically validated."
+  },
+
+  "exams": {
+    "types": ["OCT", "IOP", "Visual field"],
+    "schedule": [
+      { "day": -90, "label": "Pre-flight baseline 1" },
+      { "day": -30, "label": "Pre-flight baseline 2" },
+      { "day": 30, "label": "Flight day 30" },
+      { "day": 60, "label": "Flight day 60" },
+      { "day": 90, "label": "Flight day 90" },
+      { "day": 120, "label": "Flight day 120" },
+      { "day": 150, "label": "Flight day 150" },
+      { "day": 180, "label": "Landing (R+0)" },
+      { "day": 210, "label": "R+30" },
+      { "day": 270, "label": "R+90" },
+      { "day": 360, "label": "R+6 months" }
+    ]
+  },
+
+  "glasses": {
+    "inventory": [
+      { "id": "SG-A", "power": 0.0, "pairs": 2 },
+      { "id": "SG-B", "power": 0.5, "pairs": 2 },
+      { "id": "SG-C", "power": 1.0, "pairs": 2 },
+      { "id": "SG-D", "power": 1.5, "pairs": 2 },
+      { "id": "SG-E", "power": 2.0, "pairs": 1 },
+      { "id": "SG-F", "power": -0.5, "pairs": 1 },
+      { "id": "SG-G", "power": -1.0, "pairs": 1 }
+    ]
+  },
+
+  "returnProtocol": "Return-to-Earth measures (for example graded compression garments or fluid loading) are defined by the flight surgeon. This app only displays the plan the medical team has entered.",
+
+  "radio": {
+    "label": "Time-compressed demo: a real pass might be ~8 min every ~90 min",
+    "openSeconds": 15,
+    "periodSeconds": 50,
+    "bandwidthBytesPerSec": 420,
+    "packetLoss": 0.1,
+    "corruption": 0.05,
+    "profile": "ISS",
+    "processingDelaySeconds": 0.5,
+    "jitterSeconds": 0.2,
+    "maxBackoffSeconds": 8,
+    "digestEverySeconds": 6
+  },
+
+  "vitals": {
+    "_notice": "Live vitals thresholds are demo values.",
+    "hrDeltaRest": [20, 40],
+    "hrDeltaExercise": [70, 100],
+    "hrLow": [50, 40],
+    "spo2Low": [95, 92],
+    "tempHigh": [37.8, 38.5],
+    "sleepLow": [6, 5],
+    "stressHigh": [70, 85],
+    "radiationHigh": [100, 250]
+  }
+}

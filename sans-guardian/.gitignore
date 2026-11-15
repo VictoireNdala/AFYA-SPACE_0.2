@@ -1,0 +1,12 @@
+node_modules/
+client/dist/
+server/data/*.db
+server/data/*.db-shm
+server/data/*.db-wal
+.env
+.DS_Store
+analysis/.venv/
+analysis/outputs/
+analysis/data/model_input.csv
+__pycache__/
+client/public/media/*.mp4
