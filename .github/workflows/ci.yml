@@ -86,3 +86,43 @@ jobs:
       - uses: astral-sh/ruff-action@v3
         with:
           args: check sans models utils dashboard backend/afya_space_api backend/tests
+
+  sans-guardian:
+    name: SANS Guardian (server tests + client build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            sans-guardian/server/package-lock.json
+            sans-guardian/client/package-lock.json
+      - name: Server tests
+        working-directory: sans-guardian/server
+        run: |
+          npm ci
+          npm test
+      - name: Client build
+        working-directory: sans-guardian/client
+        run: |
+          npm ci
+          npm run build
+
+  radio-simulation:
+    name: MQTT radio simulation (pytest)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: [simulation_radio, sans-guardian/tools/radio-mqtt]
+    defaults:
+      run:
+        working-directory: ${{ matrix.folder }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt pytest
+      - run: pytest -q
