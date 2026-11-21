@@ -5,6 +5,8 @@ import react from '@vitejs/plugin-react';
 const target = process.env.SG_API ?? 'http://localhost:3001';
 
 export default defineConfig({
+  // VITE_BASE: sub-path of the static demo on GitHub Pages (e.g. /AFYA-SPACE_0.2/sans-guardian/). Default: root.
+  base: process.env.VITE_BASE || '/',
   plugins: [react()],
   server: {
     port: Number(process.env.PORT ?? 5173),

@@ -73,6 +73,10 @@ npm run dev             # dashboard on http://localhost:5173
 
 Single-process offline mode (what you would run on board): `npm run build` in `client`, then `npm start` in `server`, and open http://localhost:3001.
 
+### Static demo (GitHub Pages, no server)
+
+The dashboard also builds as a read-only static site: `VITE_STATIC=1 VITE_BASE=/<sub-path>/ npm run build` in `client`. GET requests are answered from JSON snapshots in `client/public/demo-data/`, the live vitals stream is replayed from a recording, and every write action is refused with an explicit message. To refresh the snapshots from a running server: `node scripts/export-static-demo.js --api http://localhost:3001` in `server`. The published site is built by `.github/workflows/pages.yml`.
+
 ## Analysis module (NASA data and prediction model)
 
 The results are already in `server/data/nasa/`, so the app works without Python. To recompute them (Python 3.11+):

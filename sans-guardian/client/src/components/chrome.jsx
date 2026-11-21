@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Icon, { LevelBadge } from './Icon.jsx';
 import { useApp, useStream } from '../lib/live.jsx';
-import { post } from '../lib/api.js';
+import { post, STATIC } from '../lib/api.js';
 import { dayLabel, phaseLabel } from '../lib/format.js';
 
 /** Mission clock: scrub or play the 180-day mission (+ pre/post-flight). Every view follows it. */
@@ -37,7 +37,7 @@ export function MissionClock() {
 
   return (
     <div className="clock" aria-label="Mission clock">
-      <button className="btn icon ghost" onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'Pause mission playback' : 'Play mission'} title={playing ? 'Pause' : 'Play the mission'}>
+      <button className="btn icon ghost" disabled={STATIC} onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'Pause mission playback' : 'Play mission'} title={playing ? 'Pause' : 'Play the mission'}>
         <Icon name={playing ? 'pause' : 'play'} size={15} />
       </button>
       <div className="clock-day">
@@ -55,6 +55,8 @@ export function MissionClock() {
           onPointerUp={(e) => commit(Number(e.currentTarget.value))}
           onKeyUp={(e) => commit(Number(e.currentTarget.value))}
           aria-label="Mission day"
+          disabled={STATIC}
+          title={STATIC ? 'Static demo: the mission day is fixed in this snapshot' : undefined}
         />
         <div className="clock-marks" aria-hidden="true">
           <span style={{ left: at(0) }}>Launch</span>

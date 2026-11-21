@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { api, streamUrl } from './api.js';
+import { api, streamUrl, asset, STATIC } from './api.js';
 
 // Two contexts on purpose:
 //  - AppCtx changes rarely (data revision, mission state, selection, toasts): pages and charts subscribe to it.
@@ -57,7 +57,33 @@ export function LiveProvider({ children }) {
         }
       };
     };
-    connect();
+    if (STATIC) {
+      // Static demo: replay the recorded 1 Hz stream in a loop instead of opening a WebSocket.
+      fetch(asset('demo-data/stream.json'))
+        .then((r) => r.json())
+        .then((ticks) => {
+          if (closed || !ticks.length) return;
+          setConnected(true);
+          setRev(1);
+          let i = 0;
+          const step = () => {
+            const m = ticks[i++ % ticks.length];
+            const t = Date.now();
+            setVitals(m.crew);
+            setLink(m.link);
+            setHistory((h) => {
+              const next = { ...h };
+              for (const a of m.crew) next[a.code] = [...(next[a.code] || []), { t, ...a.vitals }].slice(-HISTORY);
+              return next;
+            });
+          };
+          step();
+          timer = setInterval(step, 1000);
+        })
+        .catch(() => {});
+    } else {
+      connect();
+    }
     return () => {
       closed = true;
       clearTimeout(timer);

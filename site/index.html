@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AFYA SPACE : surveillance de la santé d'un équipage en mission longue durée et suivi du syndrome neuro-oculaire SANS. Prototype de recherche, données simulées." />
+  <title>AFYA SPACE · Système complet</title>
+  <style>
+    :root { --bg:#0b1020; --card:#141b33; --line:#26304f; --text:#eaf0ff; --muted:#9fb0d6; --accent:#6ea8ff; --accent2:#7ee0c3; }
+    @media (prefers-color-scheme: light) { :root { --bg:#f5f7fc; --card:#ffffff; --line:#d9e0f0; --text:#111a33; --muted:#51618a; --accent:#2f66d8; --accent2:#12906f; } }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+    main { max-width: 980px; margin: 0 auto; padding: 56px 16px 40px; }
+    .eyebrow { color:var(--accent2); font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; }
+    h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height:1.1; margin:.3em 0 .4em; }
+    h1 em { color:var(--accent); font-style:normal; }
+    .lead { color:var(--muted); max-width: 62ch; font-size:1.08rem; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:18px; margin:36px 0 12px; }
+    a.card { display:block; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; color:inherit; text-decoration:none; transition:transform .15s, border-color .15s; }
+    a.card:hover, a.card:focus-visible { transform:translateY(-3px); border-color:var(--accent); outline:none; }
+    .card h2 { margin:.1em 0 .3em; font-size:1.35rem; }
+    .card p { margin:.3em 0; color:var(--muted); }
+    .tag { display:inline-block; font-size:.74rem; padding:2px 9px; border:1px solid var(--line); border-radius:999px; color:var(--muted); margin:10px 6px 0 0; }
+    .go { display:inline-block; margin-top:14px; color:var(--accent); font-weight:600; }
+    h3 { margin:44px 0 10px; font-size:1.05rem; letter-spacing:.02em; }
+    ul.parts { list-style:none; padding:0; margin:0; display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:12px; }
+    ul.parts li { border:1px solid var(--line); border-radius:12px; padding:14px 16px; background:var(--card); }
+    ul.parts b { display:block; }
+    ul.parts span { color:var(--muted); font-size:.93rem; }
+    .note { margin-top:36px; padding:14px 16px; border-left:3px solid var(--accent2); background:var(--card); border-radius:0 10px 10px 0; color:var(--muted); font-size:.93rem; }
+    footer { margin-top:40px; color:var(--muted); font-size:.88rem; }
+    footer a { color:var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">NASA Space Apps Challenge 2026 · Lubumbashi</div>
+  <h1>AFYA <em>SPACE</em></h1>
+  <p class="lead">Surveiller la santé d'un équipage en mission longue durée et suivre le syndrome neuro-oculaire associé aux vols spatiaux (SANS), même avec une liaison radio limitée. Voici le système complet, assemblé à partir du travail de toute l'équipe.</p>
+
+  <div class="grid">
+    <a class="card" href="afya-space/">
+      <div class="eyebrow">Application 1</div>
+      <h2>Afya Space · suivi de l'équipage</h2>
+      <p>Constantes vitales en direct, alertes, jumeau numérique, exercice, humeur, tendances, mode hors ligne et assistant vocal.</p>
+      <span class="tag">Temps réel simulé dans le navigateur</span><span class="tag">Scénarios interactifs</span><span class="tag">Assistant vocal</span>
+      <span class="go">Ouvrir la démo →</span>
+    </a>
+    <a class="card" href="sans-guardian/">
+      <div class="eyebrow">Application 2</div>
+      <h2>SANS Guardian · suivi neuro-oculaire</h2>
+      <p>Épaisseur rétinienne et score de priorité expliqué, alertes graduées, contre-mesures, liaison radio différée, données NASA et modèle de prédiction, rapports de fin de mission.</p>
+      <span class="tag">Instantané en lecture seule</span><span class="tag">Flux rejoué</span><span class="tag">9 écrans</span>
+      <span class="go">Ouvrir la démo →</span>
+    </a>
+  </div>
+
+  <h3>Autres briques du projet (à lancer en local)</h3>
+  <ul class="parts">
+    <li><b>Backend FastAPI</b><span>API REST + WebSocket, base SQLite, migrations, tests. Le client s'y branche avec <code>VITE_API_URL</code>.</span></li>
+    <li><b>Analyse et modèles</b><span>Simulation d'équipage, pipeline scikit-learn / XGBoost, tableau de bord Streamlit.</span></li>
+    <li><b>Simulation radio MQTT</b><span>Trames avec CRC, perte de paquets, délai Terre-Lune, accusés de réception.</span></li>
+    <li><b>Serveur embarqué SANS Guardian</b><span>Règles d'alerte, file de synchronisation prioritaire, chiffrement des données génétiques.</span></li>
+  </ul>
+
+  <p class="note"><b>Prototype de recherche, pas un dispositif médical.</b> Toutes les données sont simulées. Sur ce site, SANS Guardian est un instantané en lecture seule enregistré depuis le vrai serveur : les actions d'écriture (séances, journal, voix) demandent le serveur en local. Les instructions sont dans le README.</p>
+
+  <footer>
+    Code source : <a href="https://github.com/VictoireNdala/AFYA-SPACE_0.2">github.com/VictoireNdala/AFYA-SPACE_0.2</a>
+    · Dépôt d'origine : <a href="https://github.com/divinefeliciteyamba-cpu/AFYA-SPACE">divinefeliciteyamba-cpu/AFYA-SPACE</a>
+  </footer>
+</main>
+</body>
+</html>

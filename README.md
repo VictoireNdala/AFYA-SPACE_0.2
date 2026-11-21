@@ -1,96 +1,135 @@
-# SANS Guardian
-Offline-first monitoring prototype to support prevention, early detection and management of Spaceflight Associated Neuro-ocular Syndrome (SANS) during long-duration space missions.
+# AFYA SPACE : système complet
 
-Built for the NASA Space Apps Challenge 2026 - Lubumbashi, DRC.
+Surveillance de la santé d'un équipage en mission longue durée et suivi du syndrome neuro-oculaire associé aux vols spatiaux (SANS), conçue pour fonctionner même avec une liaison radio limitée et différée.
 
-Research prototype. Not a medical device. All data is simulated. SANS has no established treatment and its exact cause is unknown. SANS Guardian does not diagnose, prescribe or choose doses. Protocols and alert thresholds are configurable by the medical team; defaults in this repository are demo values.
+Projet du **NASA Space Apps Challenge 2026 – Lubumbashi (RDC)**, réalisé par l'équipe AFYA SPACE.
 
-**Démo en ligne :** https://victoirendala.github.io/AFYA-SPACE_0.2/ (la simulation tourne dans le navigateur, sans serveur).
+> **Prototype de recherche, pas un dispositif médical.** Toutes les données sont simulées. Le SANS n'a pas de traitement établi et sa cause exacte reste inconnue : le projet ne pose aucun diagnostic, ne prescrit rien et ne choisit aucune dose. Les seuils et protocoles par défaut sont des valeurs de démonstration.
 
-## Crew analysis module
+## Démo en ligne
 
-This repository also includes a crew-analysis prototype for simulated SANS-related data. It predicts risk, flags anomalies, generates alerts and displays a wellbeing index. See [docs/CREW_ANALYSIS.md](docs/CREW_ANALYSIS.md) for its setup, methods and limitations.
+Site : **https://victoirendala.github.io/AFYA-SPACE_0.2/**
 
-Why this matters
-Weightlessness shifts about 2 liters of fluid toward the upper body (NASA Cardiovascular and Vision Laboratory).
-About 70% of ISS astronauts on ~6-month missions show SANS findings, and about 20% develop clinically significant SANS.
-Findings include optic disc swelling, choroidal folds, retinal thickening, globe flattening and refraction changes of up to about 1.5 diopters. SANS can occur without symptoms the astronaut notices, so objective measurements matter.
-NASA is studying countermeasures: a B-vitamin supplement (folate, B6, B12, riboflavin), veno-constrictive thigh cuffs and lower body negative pressure (LBNP). Their effectiveness is still under investigation.
-Missions to the Moon and Mars mean limited and delayed contact with Earth, so monitoring has to work offline.
-What SANS Guardian does
-Role	Feature
-Prevention	Pre-flight risk profile (explainable score), B-vitamin schedule and adherence tracking, thigh-cuff and LBNP session tracking with safety questionnaire, exam calendar
-Detection	Daily vision log, trends of retinal thickness / refraction / intraocular pressure vs. baseline, venous-symptom monitoring
-Management	Graded alerts to flight surgeons, spare-glasses management, post-flight recovery tracking (30 days, 90 days, 6 months), end-of-mission PDF report
-Operations	Offline storage, prioritized low-bandwidth sync over a simulated radio link (MQTT), local voice assistant, realistic simulated data
-Architecture
-Astronaut (voice / UI) -> Local API (FastAPI) -> SQLite (local)
-                                   |
-                         Priority sync queue (zlib)
-                                   |
-              Simulated radio window  -- MQTT -->  Ground station (ground.db)
-                                   |
-                          Streamlit dashboard (flight surgeons)
-Details: docs/ARCHITECTURE.md.
+| Page | Contenu |
+|---|---|
+| [`/`](https://victoirendala.github.io/AFYA-SPACE_0.2/) | Accueil du système complet |
+| [`/afya-space/`](https://victoirendala.github.io/AFYA-SPACE_0.2/afya-space/) | Afya Space : suivi de l'équipage, la simulation tourne dans le navigateur (scénarios interactifs, assistant vocal) |
+| [`/sans-guardian/`](https://victoirendala.github.io/AFYA-SPACE_0.2/sans-guardian/) | SANS Guardian : **instantané en lecture seule** enregistré depuis le vrai serveur, flux temps réel rejoué en boucle |
 
-Tech stack
-Python 3.11+, FastAPI, SQLAlchemy, SQLite, Streamlit, Plotly, paho-mqtt (Mosquitto), Faster-Whisper and Piper (optional offline voice), pytest, ruff.
+Sur le site, SANS Guardian ne peut pas écrire (séances, journal, voix, avancement de la mission) : ces actions demandent le serveur, à lancer en local (voir plus bas).
 
-Quick start
-git clone <your-repo-url> sans-guardian
-cd sans-guardian
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
+## Composition du projet
 
-# 1. Generate simulated crew data (180-day mission, fixed seed)
-python -m sans_guardian.simulation.generate --n 8 --seed 42
+| Brique | Dossier | Technologies | Rôle |
+|---|---|---|---|
+| Afya Space, client | `afya-space/client` | React, Vite, Recharts | Suivi de l'équipage : constantes vitales, alertes, tendances, exercice, moral, mode hors ligne, jumeau numérique, assistant vocal. Mode démo sans serveur (`demoEngine.js`) |
+| Afya Space, serveur | `afya-space/server` | Node, Express, WebSocket | Simulateur de constantes et règles d'alerte (port 3001) |
+| Backend FastAPI | `backend/` | FastAPI, SQLAlchemy, SQLite, Alembic | Même API que le serveur Node (REST + WebSocket `/stream`), avec base de données et tests (port 8000) |
+| SANS Guardian | `sans-guardian/` | React (client), Node + SQLite (serveur), Python (analyse) | Suivi neuro-oculaire : score de priorité expliqué, alertes graduées, contre-mesures, synchronisation prioritaire, données NASA OSDR, modèle de prédiction, rapports. Voir [sans-guardian/README.md](sans-guardian/README.md) |
+| Simulation radio MQTT | `simulation_radio/` et `sans-guardian/tools/radio-mqtt/` | Python, paho-mqtt | Liaison station spatiale / sol : trames avec CRC, pertes, délai Terre-Lune, accusés de réception |
+| Analyse et modèles | `sans/`, `models/`, `utils/`, `dashboard/` | Python, scikit-learn, XGBoost, Streamlit | Simulation d'équipage, pipeline de prédiction du risque, alertes, tableau de bord. Voir [docs/CREW_ANALYSIS.md](docs/CREW_ANALYSIS.md) |
+| Données | `data/osdr`, `sans-guardian/analysis/data` | CSV, XLSX | Jeux de données NASA OSDR (GLDS-700, LSDS-132/135, OSD-815/817) et données d'équipage simulées |
 
-# 2. Start the local API
-uvicorn sans_guardian.api.main:app --reload
+## Démarrage rapide
 
-# 3. Start the dashboard (new terminal)
+Prérequis : Node 22 ou plus récent ; Python 3.12 pour le backend, l'analyse et la radio.
+
+> Si la variable d'environnement `NODE_ENV` vaut `production` sur votre machine, `npm ci` ignore les devDependencies et `vite` est introuvable. Utilisez alors `npm ci --include=dev`.
+
+**1. Afya Space** (serveur Node + client)
+
+```bash
+cd afya-space/server && npm install && npm start     # http://localhost:3001
+cd afya-space/client && npm install && npm run dev   # http://localhost:5173
+```
+
+Pour la version sans serveur (comme sur le site) : `VITE_DEMO=1 npm run dev` dans `afya-space/client`.
+
+**2. Afya Space avec le backend FastAPI**
+
+```bash
+cd backend && uv sync && uv run -m afya_space_api    # http://localhost:8000
+cd afya-space/client && VITE_API_URL=http://localhost:8000 npm run dev
+```
+
+Sans `VITE_API_URL`, le client utilise `http://localhost:3001`. Le WebSocket est déduit de cette adresse. Les deux serveurs Node utilisent le port 3001 par défaut : lancez-les avec `PORT=...` si vous les démarrez ensemble.
+
+**3. SANS Guardian** (serveur embarqué + tableau de bord)
+
+```bash
+cd sans-guardian/server && npm install && npm run simulate && npm start   # http://localhost:3001
+cd sans-guardian/client && npm install && npm run dev                     # http://localhost:5173
+```
+
+Mode « tout-en-un » : `npm run build` dans `sans-guardian/client`, puis `npm start` dans `sans-guardian/server` et ouvrir http://localhost:3001.
+
+**4. Analyse et modèles** (à la racine)
+
+```bash
+pip install -r requirements.txt
+python -m sans.simulate --n_hist 200 --n_current 8 --seed 42
+python -m sans.pipeline --data data/sans_crew_daily.csv --out outputs
 streamlit run dashboard/app.py
+```
 
-# 4. Optional: ground station + MQTT broker
-docker compose up -d mosquitto
-python -m sans_guardian.sync.ground
-Without Docker, the app falls back to a SQLite queue and the built-in radio simulator.
+**5. Simulation radio MQTT**
 
-Optional voice: install the extra models for Faster-Whisper and Piper (see docs/ARCHITECTURE.md). Without them, the Voice console accepts typed commands.
+```bash
+cd simulation_radio && pip install -r requirements.txt && python run_simulation.py
+```
 
-3-minute demo script
-Overview: show the crew list, risk levels and the permanent research-prototype banner.
-High-risk astronaut: open the explained risk score and the retinal-thickness drift vs. baseline.
-Alert: show the graded alert (rule, value, threshold) raised by the drift.
-Thigh-cuff session: run a session; tick a venous symptom in the safety questionnaire and show the immediate URGENT alert.
-Link & Sync: watch the priority queue empty during a radio window (critical alerts first).
-Voice: say or type "log supplement taken" and see the adherence update.
-Report: generate the end-of-mission PDF.
-Configuration
-Edit config/protocol.yaml to change the supplement schedule offsets, session durations, alert thresholds, risk weights and radio-window settings. All defaults are demo values, not clinical recommendations.
+## Tests et intégration continue
 
-Tests
-pytest
-ruff check .
-Data sources and references
-NASA Human Research Program: Risk of Spaceflight Associated Neuro-ocular Syndrome (SANS)
-NASA: What Is Spaceflight Associated Neuro-ocular Syndrome? (infographic)
-NASA: Thigh Cuff study (Mitigating Headward Fluid Shifts with Veno-constrictive Thigh Cuffs during Spaceflight)
-NASA Human Health and Performance: Cardiovascular and Vision Laboratory
-NASA, Houston We Have a Podcast, episode 351, "Let's B-Complex"
-NASA Open Science Data Repository (OSDR) and Life Sciences data, used to inspire the structure of the simulated data (see docs/DATA_SOURCES.md for exactly what is used)
-Full report (French): docs/Rapport_SANS.pdf.
+La CI (`.github/workflows/ci.yml`) exécute les étapes ci-dessous à chaque push ; toutes passent sur `main`.
 
-Limitations
-Simulated data only; the risk score and thresholds are not clinically validated.
-B vitamins, thigh cuffs and LBNP are NASA research avenues, not proven treatments.
-Thigh cuffs act on venous circulation, and NASA has observed slow venous flow and a blood clot in crew members; any use requires medical supervision.
-Authentication is a static token, suitable for a prototype only.
-Use of AI
-This project was developed with the assistance of Claude (Anthropic) for research synthesis, specification and code generation. See docs/DATA_SOURCES.md.
+| Composant | Commande | Résultat |
+|---|---|---|
+| Backend FastAPI | `cd backend && uv run pytest` | 12 tests |
+| Simulation radio (2 copies) | `cd simulation_radio && pytest` | 10 + 10 tests |
+| Serveur SANS Guardian | `cd sans-guardian/server && npm test` | 13 tests |
+| Pipeline d'analyse | `python -m sans.simulate` puis `python -m sans.pipeline` | meilleur modèle : Random Forest (AUC 0,99) sur données simulées |
+| Clients React | `npm run build` (afya-space, sans-guardian) | compilation OK |
+| Serveur Afya Space | démarrage + `GET /api/health` | OK |
+| Lint Ruff | informatif, ne bloque pas | remarques de style restantes dans l'ancien code (`dashboard`, `models`, `utils`, `sans`) |
 
-License
-Choose a license before publishing (for example MIT) and add a LICENSE file.
+## Déploiement du site
 
-Team
-NASA Space Apps Challenge Lubumbashi 2026 team: AFYA SPACE.
+Le workflow `.github/workflows/pages.yml` construit les deux clients et assemble le site (`site/index.html` pour l'accueil) à chaque push sur `main` qui touche `afya-space/`, `sans-guardian/client/` ou `site/`. À activer une fois : Settings → Pages → Source : « GitHub Actions ».
+
+L'instantané de SANS Guardian est dans `sans-guardian/client/public/demo-data/`. Pour le régénérer après un changement du serveur :
+
+```bash
+cd sans-guardian/server && npm start                                   # dans un terminal
+node scripts/export-static-demo.js --api http://localhost:3001         # dans un autre
+```
+
+La compilation statique du client se fait avec `VITE_STATIC=1` (et `VITE_BASE` pour le sous-chemin).
+
+## Historique, branches et contributeurs
+
+Ce dépôt réunit le travail de toute l'équipe à partir de [divinefeliciteyamba-cpu/AFYA-SPACE](https://github.com/divinefeliciteyamba-cpu/AFYA-SPACE).
+
+- `main` contient le système complet, avec le contenu de toutes les branches d'origine.
+- Les branches d'origine sont conservées telles quelles comme archives : `upstream-main` (le `main` d'origine), `Frontend-BEN`, `dkz`, `feat/prediction-model`, `feature/assistant-vocal` et `sans-guardian`.
+- Leur historique est rattaché à `main` par une fusion de stratégie `ours` (le contenu de `main` n'a pas changé), pour que les contributeurs apparaissent dans le dépôt.
+
+Contributeurs : Victoire Ndala, Jerez Jeremy, ENOCKDKZ, Divine Felicite Yamba, Enars Lukutu.
+
+## Limites
+
+- Données simulées uniquement ; le score de risque et les seuils ne sont pas validés cliniquement.
+- Les vitamines B, les brassards de cuisse et la LBNP sont des pistes de recherche de la NASA, pas des traitements éprouvés. Les brassards agissent sur la circulation veineuse (la NASA a observé un flux veineux ralenti et un caillot chez des membres d'équipage) : tout usage exige une supervision médicale.
+- L'authentification est un jeton statique, acceptable pour un prototype seulement.
+- Sur le site, SANS Guardian est en lecture seule et la vidéo de couverture (`nasa-vision.mp4`) n'est pas incluse dans le dépôt.
+
+## Sources de données
+
+NASA Human Research Program (risque SANS), NASA Cardiovascular and Vision Laboratory, étude Thigh Cuff, NASA Open Science Data Repository (OSDR). Détail de ce qui est utilisé : [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) et [sans-guardian/docs/DATA_SOURCES.md](sans-guardian/docs/DATA_SOURCES.md). Rapport complet (français) : [sans-guardian/docs/Rapport_SANS.pdf](sans-guardian/docs/Rapport_SANS.pdf).
+
+## Utilisation de l'IA
+
+Ce projet a été développé avec l'assistance de Claude (Anthropic) pour la synthèse de recherche, la spécification, le code et l'intégration des branches. Voir `docs/DATA_SOURCES.md`.
+
+## Licence
+
+Apache License 2.0 : voir [LICENSE](LICENSE).

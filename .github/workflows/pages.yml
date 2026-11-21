@@ -1,12 +1,20 @@
-# Publie la démo en ligne (interface React, simulation exécutée dans le navigateur) sur GitHub Pages :
+# Publie le système complet sur GitHub Pages :
 # https://victoirendala.github.io/AFYA-SPACE_0.2/
+#   /               page d'accueil (site/index.html)
+#   /afya-space/    démo Afya Space (simulation exécutée dans le navigateur)
+#   /sans-guardian/ démo SANS Guardian (instantané en lecture seule du vrai serveur + flux rejoué)
 # À activer une seule fois : Settings -> Pages -> Source : « GitHub Actions ».
+# Pour rafraîchir l'instantané SANS Guardian : voir sans-guardian/README.md (export-static-demo.js).
 name: Deploy demo to GitHub Pages
 
 on:
   push:
     branches: [main]
-    paths: ['afya-space/**', '.github/workflows/pages.yml']
+    paths:
+      - 'afya-space/**'
+      - 'sans-guardian/client/**'
+      - 'site/**'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -21,25 +29,48 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BASE: /${{ github.event.repository.name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: afya-space/client/package-lock.json
-      - name: Build (mode démo, sous-chemin du dépôt)
+          cache-dependency-path: |
+            afya-space/client/package-lock.json
+            sans-guardian/client/package-lock.json
+
+      - name: Build Afya Space (mode démo, sous-chemin /afya-space/)
         working-directory: afya-space/client
         env:
           VITE_DEMO: "1"
-          VITE_BASE: /${{ github.event.repository.name }}/
+          VITE_BASE: ${{ env.BASE }}/afya-space/
         run: |
           npm ci
           npm run build
+
+      - name: Build SANS Guardian (mode statique, sous-chemin /sans-guardian/)
+        working-directory: sans-guardian/client
+        env:
+          VITE_STATIC: "1"
+          VITE_BASE: ${{ env.BASE }}/sans-guardian/
+        run: |
+          npm ci
+          npm run build
+
+      - name: Assemble le site
+        run: |
+          mkdir -p _site/afya-space _site/sans-guardian
+          cp site/index.html _site/index.html
+          cp -r afya-space/client/dist/. _site/afya-space/
+          cp -r sans-guardian/client/dist/. _site/sans-guardian/
+          touch _site/.nojekyll
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: afya-space/client/dist
+          path: _site
 
   deploy:
     needs: build

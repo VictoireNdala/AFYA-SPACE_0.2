@@ -109,6 +109,12 @@ jobs:
         run: |
           npm ci
           npm run build
+      - name: Client build (static demo)
+        working-directory: sans-guardian/client
+        env:
+          VITE_STATIC: "1"
+          VITE_BASE: /AFYA-SPACE_0.2/sans-guardian/
+        run: npm run build
 
   radio-simulation:
     name: MQTT radio simulation (pytest)

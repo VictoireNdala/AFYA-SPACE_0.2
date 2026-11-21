@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useApi, useApp } from '../lib/live.jsx';
 import Icon from '../components/Icon.jsx';
+import { asset } from '../lib/api.js';
 import { Panel, CrewPicker, Empty } from '../components/chrome.jsx';
 import { dayLabel, signed, fixed, pct } from '../lib/format.js';
 
@@ -34,7 +35,7 @@ function Header({ title, sub, r }) {
           <h1 style={{ marginTop: 6 }}>{title}</h1>
           <p className="r-sub">{sub}</p>
         </div>
-        <img src="/favicon.svg" alt="" width="44" height="44" />
+        <img src={asset('favicon.svg')} alt="" width="44" height="44" />
       </div>
       <p className="r-note" style={{ marginTop: 10 }}>
         Mission day {dayLabel(r.mission.day)} ({r.mission.phase}) · launch {r.mission.launchDate} · {r.mission.missionDays}-day mission · generated {new Date(r.generatedAt).toLocaleString('en-GB')}

@@ -25,6 +25,7 @@ import { MissionClock, LinkPill, Toasts } from './components/chrome.jsx';
 import { VoiceDock } from './components/Voice.jsx';
 import { VoiceProvider } from './lib/voice.jsx';
 import { useApi, useApp } from './lib/live.jsx';
+import { STATIC, asset } from './lib/api.js';
 import Overview from './pages/Overview.jsx';
 import Astronaut from './pages/Astronaut.jsx';
 import Countermeasures from './pages/Countermeasures.jsx';
@@ -56,7 +57,7 @@ function Backdrop({ page }) {
   return (
     <div className="backdrop" aria-hidden="true">
       {Object.keys(BG_POS).map((k) => (
-        <img key={k} src={`/images/${k}.jpg`} loading="lazy" alt="" className={k === active ? 'on' : ''} style={{ objectPosition: BG_POS[k] }} />
+        <img key={k} src={asset(`images/${k}.jpg`)} loading="lazy" alt="" className={k === active ? 'on' : ''} style={{ objectPosition: BG_POS[k] }} />
       ))}
     </div>
   );
@@ -116,7 +117,7 @@ export default function App() {
           <div className="sidebar-foot">
             <div className="row small" style={{ gap: 8 }}>
               <span className={`dot ${connected ? 'live' : 'off'}`} />
-              <span className="soft">{connected ? 'Onboard server connected' : 'Onboard server offline'}</span>
+              <span className="soft">{connected ? (STATIC ? 'Recorded stream (replay)' : 'Onboard server connected') : 'Onboard server offline'}</span>
             </div>
             <p className="disclaimer-mini">Research prototype for the NASA Space Apps Challenge 2026, Lubumbashi. Not a medical device. Simulated data.</p>
           </div>
@@ -125,6 +126,7 @@ export default function App() {
         <main className="main">
           <div className="proto-strip" role="note">
             <b>Research prototype</b><span className="sep" />Not a medical device<span className="sep" />Simulated data
+            {STATIC && <><span className="sep" /><b>Static demo: read-only snapshot, live stream replayed</b></>}
             <span className="right"><LinkPill onOpen={() => go('link')} /><MissionClock /></span>
           </div>
           <header className="topbar">
@@ -135,7 +137,7 @@ export default function App() {
             </div>
             {P.img && (
               <figure className="page-figure">
-                <img src={P.img.src} alt="" style={{ objectPosition: P.img.pos, ...(P.img.zoom ? { transform: `scale(${P.img.zoom})`, transformOrigin: P.img.origin } : {}) }} />
+                <img src={asset(P.img.src)} alt="" style={{ objectPosition: P.img.pos, ...(P.img.zoom ? { transform: `scale(${P.img.zoom})`, transformOrigin: P.img.origin } : {}) }} />
                 <figcaption>{P.img.caption}</figcaption>
               </figure>
             )}

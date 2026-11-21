@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useApi, useApp, useLive } from '../lib/live.jsx';
-import { post } from '../lib/api.js';
+import { post, asset } from '../lib/api.js';
 import Icon, { LevelBadge, RiskBadge } from '../components/Icon.jsx';
 import { Panel, Stat, Empty } from '../components/chrome.jsx';
 import { ChartFrame, LegendLine } from '../charts/core.jsx';
@@ -155,7 +155,7 @@ function CoverMedia() {
   };
   return (
     <div className="cover-media">
-      <video ref={ref} src="/media/nasa-vision.mp4" poster="/images/nasa-eye-exam.jpg" autoPlay muted loop playsInline preload="metadata" />
+      <video ref={ref} src={asset('media/nasa-vision.mp4')} poster={asset('images/nasa-eye-exam.jpg')} autoPlay muted loop playsInline preload="metadata" />
       <button className="btn sm sound" onClick={toggle} aria-label={muted ? 'Turn sound on' : 'Mute'}>
         <Icon name="volume" size={13} /> {muted ? 'Sound on' : 'Mute'}
       </button>
