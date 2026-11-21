@@ -10,3 +10,6 @@ analysis/outputs/
 analysis/data/model_input.csv
 __pycache__/
 client/public/media/*.mp4
+
+# Journaux du serveur
+server/data/*.log
