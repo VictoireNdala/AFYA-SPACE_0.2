@@ -147,3 +147,14 @@ Simply run
 pytest -vv .
 ```
 
+
+## Brancher le client React sur ce backend
+
+Par defaut, le client (`afya-space/client`) se connecte au serveur Node sur `http://localhost:3001`. Pour utiliser ce backend FastAPI (port 8000) a la place :
+
+```bash
+cd afya-space/client
+VITE_API_URL=http://localhost:8000 npm run dev
+```
+
+Le WebSocket (`/stream`) est deduit automatiquement de cette adresse.

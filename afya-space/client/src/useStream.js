@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { createDemoEngine } from './demoEngine.js';
 
-export const API = 'http://localhost:3001';
-const WS_URL = 'ws://localhost:3001/stream';
+// Adresse du serveur : Node (3001, par défaut) ou backend FastAPI (ex. VITE_API_URL=http://localhost:8000).
+export const API = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const WS_URL = API.replace(/^http/, 'ws') + '/stream';
 const MAX_POINTS = 60;
 
 // Mode démo (site en ligne, GitHub Pages) : la simulation tourne dans le navigateur, sans serveur.
