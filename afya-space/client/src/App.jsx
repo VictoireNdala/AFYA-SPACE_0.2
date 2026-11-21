@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useStream from './useStream.js';
+import useStream, { DEMO } from './useStream.js';
 import CrewModule from './CrewModule.jsx';
 import TrendsModule from './TrendsModule.jsx';
 import ExerciseModule from './ExerciseModule.jsx';
@@ -23,12 +23,12 @@ export default function App() {
   return (
     <div className="app">
       <header className="top">
-        <img src="/logo.jpg" alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
         <div>
           <h1>AFYA SPACE</h1>
           <p>Santé de l’équipage en mission longue durée</p>
         </div>
-        <span className={`conn ${connected ? 'on' : 'off'}`}>{connected ? 'Connecté' : 'Hors ligne'}</span>
+        <span className={`conn ${connected ? 'on' : 'off'}`}>{DEMO ? 'Démo en ligne' : connected ? 'Connecté' : 'Hors ligne'}</span>
       </header>
 
       <nav className="tabs" role="tablist">
@@ -46,7 +46,7 @@ export default function App() {
       {tab === 'offline' && <OfflineModule />}
       {tab === 'twin' && <TwinModule />}
 
-      <footer>Données simulées – prototype de démonstration, pas un dispositif médical.</footer>
+      <footer>{DEMO && 'Démo en ligne : la simulation tourne dans votre navigateur. '}Données simulées – prototype de démonstration, pas un dispositif médical.</footer>
     </div>
   );
 }

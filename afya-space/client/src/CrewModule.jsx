@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LineChart, Line, YAxis, ResponsiveContainer } from 'recharts';
 import Icon from './Icon.jsx';
-import { API } from './useStream.js';
+import { triggerScenario } from './useStream.js';
 
 const PROFILE = {
   a1: { name: 'Cmdt. Amara Diallo', day: 142 },
@@ -53,8 +53,7 @@ export default function CrewModule({ crew, history, alerts }) {
     ['sleep', 'moon', 'Sommeil', fmtSleep(a.vitals.sleep), ''],
   ];
 
-  const trigger = (name) =>
-    fetch(`${API}/api/scenario/${name}?target=${a.id}`, { method: 'POST' }).catch(() => {});
+  const trigger = (name) => triggerScenario(name, a.id);
 
   return (
     <>

@@ -5,6 +5,8 @@ Built for the NASA Space Apps Challenge 2026 - Lubumbashi, DRC.
 
 Research prototype. Not a medical device. All data is simulated. SANS has no established treatment and its exact cause is unknown. SANS Guardian does not diagnose, prescribe or choose doses. Protocols and alert thresholds are configurable by the medical team; defaults in this repository are demo values.
 
+**Démo en ligne :** https://victoirendala.github.io/AFYA-SPACE_0.2/ (la simulation tourne dans le navigateur, sans serveur).
+
 ## Crew analysis module
 
 This repository also includes a crew-analysis prototype for simulated SANS-related data. It predicts risk, flags anomalies, generates alerts and displays a wellbeing index. See [docs/CREW_ANALYSIS.md](docs/CREW_ANALYSIS.md) for its setup, methods and limitations.
