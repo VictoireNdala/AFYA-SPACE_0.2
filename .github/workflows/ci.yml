@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  backend:
+    name: Backend FastAPI (pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync
+      - run: uv run pytest -v
+
+  analysis:
+    name: Crew analysis pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Simulate crew data
+        run: python -m sans.simulate --n_hist 200 --n_current 8 --seed 42
+      - name: Run analysis
+        run: python -m sans.pipeline --data data/sans_crew_daily.csv --out outputs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: analysis-outputs
+          path: outputs/
+
+  client:
+    name: Client React (build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: afya-space/client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: afya-space/client/package-lock.json
+      - run: npm ci
+      - run: npm run build
+
+  server:
+    name: Server Node (smoke test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: afya-space/server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: afya-space/server/package-lock.json
+      - run: npm ci
+      - name: Start server and call /api/health
+        run: |
+          PORT=4010 node index.js &
+          sleep 3
+          curl --fail http://localhost:4010/api/health
+
+  lint:
+    name: Ruff (informational)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
+        with:
+          args: check sans models utils dashboard backend/afya_space_api backend/tests
